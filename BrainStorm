@@ -1,0 +1,20 @@
+1- we need backend that gives us APIs 
+2- we need a web application that public clients can have access to it and it consumes the back end API's
+3- we can create a native app for public clients which consumes API's
+4- we need a web application that only company employees can have access to it for managing data that consumes API's 
+5- users can register with facebook, google or username password
+6- user can create an event which has following properties:
+-- from, to, when going, when coming back,name , requirments {ride, food, accomodation}, rules {noDrink, smoking, pets, underAge,...}
+   capacity,...
+7- users can search for events 
+8- users can select interested event and they can see how many offers are left and based on the event requirment they can set what they want to provide 
+   for that event
+9- the creator of the event eaither can confirm interested people or reject them if it is not set to be as an instant booking
+10- once the capacity of the event is full the event is being set as closed.
+11- after the event is over the participant they can rate and leave reaview for each other once.
+
+Searching Events:
+ 1- is there a ready service avaiable that can provide us with a list of avaiable events in every location how much is the cost of the service what details it returns and what details it requires.
+ 2- if the service isn't avaiable from which source we can get the events and register them into our inventory?
+ 
+ 
