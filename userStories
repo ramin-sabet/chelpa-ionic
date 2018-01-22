@@ -1,0 +1,44 @@
+User signup/signin
+- User wants to signup by phone number and put their name and last name
+
+Second Page:
+- on top we have a search box after selecting an event the user can choose between ride or passenger if the event is not exist 
+  at the bottom of the page there is an option to create that event
+  
+ Third page:
+ - Rider has to fill the following properties:
+ -- To Event from -----
+ -- From Event to -----
+ -- time 
+ -- Capapcity
+ -- Price (optional)
+ -- having a plus sign that he can add new property value if he wants
+ 
+ Fourth page:
+ - Passengers are provided with a list of all the rides to/from the event
+ - there is a possibility to sort the list by rating, time and price
+ - passenger can choose one or multiple rides they are able to see the drivers profile and confirm their interest for that ride
+ 
+ Fifth page/Creating an event:
+  - someone who is interested to create an event need to fill a form with the following properties:
+ -- name
+ -- location
+ -- Time
+ -- Guest numbers
+ -- Costs
+ -- having a plust sign that he can add new property, value if he wants
+ 
+ Sixth page/ riders can be notified of passengers inquires 
+  - driver can see the list of inquires with a basic details of the passenger, Driver is able to ciick on the passenger
+    to see the full profile of the passenger and eather can confirm or ignore the request.
+  - driver can accept more than his initial capacity but has to update his capacity before confirming more passenger.
+  - when the driver is happy with the number of passengers he can close the ride.
+ 
+ Passenger gets notified of driver confirmation
+  - Passenger other pending request for ride will be canceled automatically.
+  
+ The passenger and driver can rate/review each other
+  - Say one hour after driving driver can have access to the ride history and the passenger were into the ride and she can rate/review 
+   her passengers.
+  - The passenger can see the history of her ride and can rate/review the driver 
+ 
