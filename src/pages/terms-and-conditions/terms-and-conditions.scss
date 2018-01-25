@@ -1,0 +1,95 @@
+@media screen and (min-width: 781px) {
+    page-terms-and-conditions {
+        .ion-page show-page {
+            padding: 2px 2px 2px 2px;
+        }
+        .gradient {
+            display: grid;
+            grid-template-rows: 25% 50% 25%;
+            height: 100%;
+            background: linear-gradient(#B0B0B0, #606060);
+        }
+        .title {
+            margin-top: 10px;
+            font-size: 150px;
+            font-weight: bold;
+            color: #80006f;
+        }
+        .bg-image {
+            background-image: url('../assets/imgs/firstPageImage.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 50% 50%;
+        }
+        .footer {
+            position: absolute;
+            font-size: 50px;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: 780px) and (min-width: 480px) {
+    page-terms-and-conditions {
+        .ion-page show-page {
+            padding: 2px 2px 2px 2px;
+        }
+        .gradient {
+            display: grid;
+            grid-template-rows: 25% 50% 25%;
+            height: 100%;
+            background: linear-gradient(#B0B0B0, #606060);
+        }
+        .title {
+            margin-top: 10px;
+            font-size: 100px;
+            font-weight: bold;
+            color: #80006f;
+        }
+        .bg-image {
+            background-image: url('../assets/imgs/firstPageImage.png');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .footer {
+            position: absolute;
+            font-size: 40px;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    page-terms-and-conditions {
+        .ion-page show-page {
+            padding: 2px 2px 2px 2px;
+        }
+        .gradient {
+            display: grid;
+            grid-template-rows: 25% 50% 25%;
+            height: 100%;
+            background: linear-gradient(#B0B0B0, #606060);
+        }
+        .title {
+            margin-top: 10px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #80006f;
+        }
+        .bg-image {
+            background-image: url('../assets/imgs/firstPageImage.png');
+            background-repeat: no-repeat;
+            background-position: center;         
+        }
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
