@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ChelpaHomePage } from '../chelpa-home/chelpa-home';
+import { CodePage } from '../code/code';
 
-/**
- * Generated class for the TermsAndConditionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,6 +16,10 @@ export class TermsAndConditionsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TermsAndConditionsPage');
+  }
+
+  gotoHomePage() {
+    this.navCtrl.push('ChelpaHomePage');
   }
 
 }
