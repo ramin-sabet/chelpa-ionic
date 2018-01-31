@@ -1,75 +1,76 @@
 
-- User wants to signup by phone number and put their name and last name
--- 
+-- User wants to signup by phone number and put their name and last name , L
+-- Backend has to receive the firebase token and validate it, M
 - on top we have a search box after selecting an event the user can choose between ride or passenger if the event is not exist 
   at the bottom of the page there is an option to create that event
-  -- creating the search box in Ionic to auto complete events after entering a word.
-  -- An api to receive a word and return back the list of the events related to that word.
-  -- client choose an event then he can either choose rider or passenger buttons
-  -- If the event doesn't show up in the list of events it will pop up a button to create a new event
-  -- there is a fixed button at the bottom of the page that enable to create a new event  
+  -- creating the search box in Ionic to auto complete events after entering a word, XS
+  -- Finding an Api to get the events lists, M
+  -- merging the result of our internal database with the external api, M
+  -- An Api to register the event into our event list Once the user select that event, M
+  -- An api to receive a word and return back the list of the events related to that word, M
+  -- After selecting the event there should be a template to show the details of that event with the following information: 
+     picture, date, time, description, M
+  -- An Api to get the event id and returns the event details, S
+  -- client choose an event then he can either choose rider or passenger buttons, XS
+  -- If the event doesn't show up in the list of events it will pop up a button to create a new event, M
+  -- there is a fixed button at the bottom of the page that enable to create a new event, XS 
   - Creating an event
   -- someone who is interested to create an event need to fill a form with the following properties:
-     name,location,Time,Guest numbers,Costs
-  -- having a plus sign that he can add new property, value if he wants
-  -- when the plus sign is clicked there should be two boxes under the fixed properties.
-  -- where the user start typing in the properties the name of peroperties can be auto completed.
-  -- An Api to get the event properties from the database and register the property if it's not exist.
-  -- assigning a value to the new property.
-  -- a register button to save the event.
-  -- An post Api to receive the filled data and register them into event table.
+     name,location,Time,Guest numbers,Costs, M
+  -- having a plus sign that he can add new property, value if he wants, XS
+  -- when the plus sign is clicked there should be two boxes under the fixed properties, S
+  -- where the user start typing in the properties the name of peroperties can be auto completed, M
+  -- An Api to get the event properties from the database and register the property if it's not exist, M
+  -- assigning a value to the new property, XS
+  -- a register button to save the event, M
+  -- An post Api to receive the filled data and register them into event table, S
   - Rider set his ride.
  -- Rider has to fill the following properties:
-    To Event from -----, From Event to -----, time , Capapcity, Price (optional)
- -- having a plus sign that he can add new property value if he wants.
- -- when the plus sign is clicked there should be two boxes under the fixed properties.
-  -- where the user start typing in the properties the name of peroperties can be auto completed.
-  -- An Api to get the ride properties from the database and register the property if it's not exist.
-  -- assigning a value to the new property.
-  -- a register button to save the ride.
-  -- An post Api to receive the filled data and register them into ride table.
+    To Event from -----, From Event to -----, time , Capapcity, Price (optional), S
+ -- having a plus sign that he can add new property value if he wants, XS
+ -- when the plus sign is clicked there should be two boxes under the fixed properties, S
+  -- where the user start typing in the properties the name of peroperties can be auto completed, S
+  -- An Api to get the ride properties from the database and register the property if it's not exist, S
+  -- assigning a value to the new property, S
+  -- a register button to save the ride, S
+  -- An post Api to receive the filled data and register them into ride table, M
   
   - Passenger can choose a ride.
-  -- Passengers are provided with a list of all the rides to/from the event.
-    with the following details in each row: from/to, Rider name, rate, destination, time, price.
-  -- If the list is higher than an specific number As we scroll down the list it has to load more rides.  
-  -- there is a possibility to sort the list by above criterias.
-  -- An Api that can get an event Id and sorting criterias and return the list of all rides for that event.
- -- passenger can click on a ride and to show the more information about the riders
- -- An Api to get the riderId and return the profile and rate/reviews of that rider.
- -- A page that shows full details of the rider with a list of all the reviews.
+  -- Passengers are provided with a list of all the rides to/from the event
+    with the following details in each row: from/to, Rider name, rate, destination, time, price, M
+  -- If the list is higher than an specific number As we scroll down the list it has to load more rides, M  
+  -- there is a possibility to sort the list by above criterias, L
+  -- An Api that can get an event Id and sorting criterias and return the list of all rides for that event, M
+ -- passenger can click on a ride to show more information about the rider, XS
+ -- An Api to get the riderId and return the profile and rate/reviews of that rider, S
+ -- A page that shows full details of the rider with a list of all the reviews, M
 
  
- -- passenger can choose one or multiple rides with a check box
--- An stickiy button at the end of the list to confirm  all the selected rides by the passenger
--- An Api to get the id of all the selected ride and the id of the passenger and save them in the passegerRide table.
+ -- passenger can choose one or multiple rides with a check box, S
+-- An stickiy button at the end of the list to confirm  all the selected rides by the passenger, M
+-- An Api to get the id of all the selected ride and the id of the passenger and save them in the passegerRide table, M
   
- -- backend has to send a push message to notify the rider on intersted rides.
- -- Rider should be able to receive notification on her app/phone.
- -- Rider should be able to click on the notification to see the list of interested rides.
- -- A scrolling page from notificatio icon to show all the interested passenger for the ride 
- -- An Api to get the id of the ride and retrive all the interested passenger from passengerRide table.
- -- Each row shoud have the option eaither to accept or view profile and the name of interested passnger.
- -- An Api to get the rideid and passengerId and save them into an confirmedRide table.
- -- Once the rider confirm a passenger the passenger receive a notification on her phone/app for the confirmation.
- -- Backend should be able to push a notification to the front end for the ride confirmation by the rider to the passenger.
- -- passenger should be able to click on the notification to be able to see the ride details including rider name, price, time
- -- An Api to get the the rideId and returns information about the ride.
- -- Passenger should be able to click on the ride to see the rider/ride profile.
+ -- backend has to send a push message to notify the rider on intersted rides, L
+ -- Rider should be able to receive notification on her app/phone, L
+ -- Rider should be able to click on the notification to see the list of interested passengers, M
+ -- A scrolling page from notificatio icon to show all the interested passenger for the ride, S
+ -- An Api to get the id of the ride and retrive all the interested passenger from passengerRide table, M
+ -- Each row shoud have the option eaither to accept or view profile and the name of interested passnger, S
+ -- An Api to get the rideid and passengerId and save them into an confirmedRide table, M
+ -- Once the rider confirm a passenger the passenger receive a notification on her phone/app for the confirmation, M
+ -- Backend should be able to push a notification to the front end for the ride confirmation by the rider to the passenger, M
+ -- passenger should be able to click on the notification to be able to see the ride details including rider name, price, time, M
+ -- An Api to get the the rideId and returns information about the ride, S
+ -- Passenger should be able to click on the ride to see the rider/ride profile, M
  
- -- A sticky button at the bootom of the passenger list page to close the ride.
- -- An Api to get the rideId that will update the rides table as closed.
+ -- A sticky button at the bootom of the passenger list page to close the ride, M
+ -- An Api to get the rideId that will update the rides table as closed, S
 
--- An Api to cancel the Passenger other pending request for ride.
+-- An Api to cancel the Passenger other pending request for ride, S
 
--- An Api to send a push notification After an Hour from the ride to all the participants in ride.
--- A notification appears on every one phone/app who participated in the ride.
--- By cliciking on the notification a list of all the participants excluding you appears which has name rating and comment area
--- An Api to get the id of the user and the rideID and returns all the participants in that ride.
--- An Api to get the ride and user id along the rate and review and add it to the userRateandReview table.
+-- An Api to send a push notification After an Hour from the ride to all the participants in ride, M
+-- A notification appears on every one phone/app who participated in the ride, M
+-- By cliciking on the notification a list of all the participants excluding you appears which has name rating and comment area, M
+-- An Api to get the id of the user and the rideID and returns all the participants in that ride, M
+-- An Api to get the ride and user id along the rate and review and add it to the userRateandReview table, S
 
-
-
-  - Say one hour after driving driver can have access to the ride history and the passenger were into the ride and she can rate/review 
-   her passengers.
-  - The passenger can see the history of her ride and can rate/review the driver 
