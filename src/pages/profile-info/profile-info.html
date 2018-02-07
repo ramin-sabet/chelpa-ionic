@@ -1,0 +1,17 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>profileInfo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p>Please provide your name</p>
+  <ion-input type="tetxt" [(ngModel)]="profileName"></ion-input>
+  <div padding>
+      <button ion-button color="primary" block (click)="gotoHomePage()">NEXT</button>
+    </div>
+</ion-content>

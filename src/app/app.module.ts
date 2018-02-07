@@ -3,14 +3,17 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
-//import { HomePage } from '../pages/home/home';
 import { ChelpaHomePageModule } from '../pages/chelpa-home/chelpa-home.module';
 import { CodePageModule } from '../pages/code/code.module';
+import { ProfileInfoPageModule } from '../pages/profile-info/profile-info.module';
 import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { UserAuthenticationProvider } from '../providers/user-authentication/user-authentication';
+//import { HttpClientModule } from '@angular/common/http';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -29,10 +32,13 @@ const firebaseConfig: FirebaseAppConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     ChelpaHomePageModule,
-    CodePageModule
+    CodePageModule,
+    ProfileInfoPageModule,
+   // HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,7 +48,8 @@ const firebaseConfig: FirebaseAppConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    UserAuthenticationProvider
   ]
 })
 export class AppModule { }
