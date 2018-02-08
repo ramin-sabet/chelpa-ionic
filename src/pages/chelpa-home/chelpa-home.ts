@@ -38,6 +38,10 @@ export class ChelpaHomePage{
     });
   }
 
+  addNewEvent(){
+    this.navCtrl.push('AddNewEventPage');
+  }
+
  
 
   sendCode(form) {

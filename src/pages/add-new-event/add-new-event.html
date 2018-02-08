@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Adding New Event</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="newEvent" (ngSubmit)="submitForm(newEvent.value)">
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          Name of the Event
+        </ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="newEvent.controls['name'].hasError('required') && newEvent.controls['name'].touched">
+        <p> *Name is required</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Location
+        </ion-label>
+        <ion-input type="text" formControlName="location"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="newEvent.controls['location'].hasError('required') && newEvent.controls['location'].touched">
+        <p> *Location is required</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Time
+        </ion-label>
+        <ion-datetime formControlName="time" displayFormat="D MMM YYYY" min="1990-02" max="2010-10" [(ngModel)]="webkitReleased"></ion-datetime>
+        <ion-datetime formControlName="time" displayFormat="hh:mm A" [(ngModel)]="tokyoTime"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Guest Numbers
+        </ion-label>
+        <ion-input type="number" formControlName="guestNumbers"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="newEvent.controls['guestNumbers'].hasError('required') && newEvent.controls['guestNumbers'].touched">
+        <p> *Guest Numbers is required</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Costs
+        </ion-label>
+        <ion-input type="number" formControlName="costs"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="newEvent.controls['costs'].hasError('required') && newEvent.controls['costs'].touched">
+        <p> *Costs is required</p>
+      </ion-item>
+    </ion-list>
+
+    <button clear ion-button [disabled]="!newEvent.valid">Submit</button>
+  </form>
+
+</ion-content>

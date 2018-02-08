@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { ChelpaHomePageModule } from '../pages/chelpa-home/chelpa-home.module';
 import { CodePageModule } from '../pages/code/code.module';
 import { ProfileInfoPageModule } from '../pages/profile-info/profile-info.module';
+import { AddNewEventPageModule } from '../pages/add-new-event/add-new-event.module';
 import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -38,7 +39,8 @@ const firebaseConfig: FirebaseAppConfig = {
     ChelpaHomePageModule,
     CodePageModule,
     ProfileInfoPageModule,
-   // HttpClientModule
+    AddNewEventPageModule
+    // HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
