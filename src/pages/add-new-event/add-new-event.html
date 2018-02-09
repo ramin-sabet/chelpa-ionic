@@ -53,18 +53,33 @@
         <ion-input type="number" formControlName="costs"></ion-input>
       </ion-item>
       <ion-item *ngIf="newEvent.controls['costs'].hasError('required') && newEvent.controls['costs'].touched">
-        <p> *Costs is required</p>
+        <p> *Costs is required{{newEvent.controls['costs']}}</p>
       </ion-item>
-    </ion-list>
-    <ion-item>
-      <ion-label>
-          <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>    Add More Fields
-      </ion-label>
-     <!-- <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon> -->
-    </ion-item>
 
+      <form formArrayName="items" *ngFor="let item of newEvent.get('items').controls; let i = index;">
+        <ion-item [formGroupName]="i">
+          <ion-input formControlName="name" placeholder="Field name"></ion-input>
+          <ion-input formControlName="description" placeholder="Field description"></ion-input>
+          <button ion-button alert color="danger" item-end (click)="removeItem($event,i)">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item *ngIf="(newEvent.controls['items'].controls[i].controls['name'].hasError('required') && newEvent.controls['items'].controls[i].controls['name'].touched) || 
+        (newEvent.controls['items'].controls[i].controls['description'].hasError('required') && newEvent.controls['items'].controls[i].controls['description'].touched)">
+          <p> *Field name and field description is required(You may remove the row to continue)</p>
+        </ion-item>
+      </form>
+
+
+      <button ion-button icon-start (click)="addItem($event)">
+        <ion-label>
+          <ion-icon name="add"></ion-icon>
+          Add More Fields
+        </ion-label>
+      </button>
+
+    </ion-list>
 
     <button clear ion-button [disabled]="!newEvent.valid">Submit</button>
   </form>
-
 </ion-content>
