@@ -8,13 +8,14 @@ import 'rxjs/add/operator/filter';
 export class FieldOptionsProvider implements AutoCompleteService {
 
   labelAttribute = "name";
+  url = 'http://shareit-sharetrip.193b.starter-ca-central-1.openshiftapps.com/';
 
   constructor(public http: HttpClient) {
     console.log('Hello FieldOptionsProvider Provider');
   }
 
   getResults(keyword:string) {
-    return this.http.get("https://restcountries.eu/rest/v1/name/"+keyword)
+    return this.http.get(this.url+`stories/propertynames?property=${keyword}&take=5"`)
     .map(
         result =>
         {

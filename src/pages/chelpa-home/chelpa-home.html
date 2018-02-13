@@ -8,7 +8,9 @@
   
   <ion-content padding>
     <section *ngIf="afAuth.authState | async; let user; else phForm">Welcome</section>
-    <button ion-button round type="submit" (click)="addNewEvent()">Add New Event</button>
+    <ion-footer>      
+    <button ion-button full type="submit" (click)="addNewEvent()">Add New Event</button>
+    </ion-footer>
     <ng-template #phForm>
       <form #phoneForm="ngForm" (ngSubmit)="sendCode(phoneForm)">
         <ion-item>
