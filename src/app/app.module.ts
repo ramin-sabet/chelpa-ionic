@@ -14,7 +14,8 @@ import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { UserAuthenticationProvider } from '../providers/user-authentication/user-authentication';
-//import { HttpClientModule } from '@angular/common/http';
+import { FieldOptionsProvider } from '../providers/field-options/field-options';
+import { HttpClientModule } from '@angular/common/http';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -39,8 +40,8 @@ const firebaseConfig: FirebaseAppConfig = {
     ChelpaHomePageModule,
     CodePageModule,
     ProfileInfoPageModule,
-    AddNewEventPageModule
-    // HttpClientModule
+    AddNewEventPageModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +52,8 @@ const firebaseConfig: FirebaseAppConfig = {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    UserAuthenticationProvider
+    UserAuthenticationProvider,
+    FieldOptionsProvider
   ]
 })
 export class AppModule { }

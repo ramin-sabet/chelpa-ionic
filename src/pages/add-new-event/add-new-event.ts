@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FieldOptionsProvider } from '../../providers/field-options/field-options';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,7 @@ export class AddNewEventPage {
   items: FormArray;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder, public fieldOption:FieldOptionsProvider) {
     this.newEvent = this.formBuilder.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
