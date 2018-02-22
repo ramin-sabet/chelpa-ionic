@@ -16,6 +16,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { UserAuthenticationProvider } from '../providers/user-authentication/user-authentication';
 import { FieldOptionsProvider } from '../providers/field-options/field-options';
 import { HttpClientModule } from '@angular/common/http';
+import { AutoCompleteLocationProvider } from '../providers/auto-complete-location/auto-complete-location';
+import { EventEngineProvider } from '../providers/event-engine/event-engine';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -53,7 +55,9 @@ const firebaseConfig: FirebaseAppConfig = {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserAuthenticationProvider,
-    FieldOptionsProvider
+    FieldOptionsProvider,
+    AutoCompleteLocationProvider,
+    EventEngineProvider
   ]
 })
 export class AppModule { }
