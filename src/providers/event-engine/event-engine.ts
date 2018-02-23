@@ -12,7 +12,6 @@ export class EventEngineProvider {
   }
 
   submitEvent (param : any ){
-  //  console.log(param);
     this.http.post(this.url, param).subscribe(data => console.log(data) );
   }
 }

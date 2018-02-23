@@ -19,7 +19,7 @@ export class AddNewEventPage {
   addInput = false;
   items: FormArray;
   creatorId;
-  properties: any= [{ 'property': '' }, { 'value': '' }];  
+  properties: any = [];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -47,22 +47,20 @@ export class AddNewEventPage {
 
 
   submitForm(value: any) {
- 
-    for (var i = 0; i < value.items.length; i++) {
-      
-     if(value.items.length){
-      this.properties=[];
-     }
-      else 
-      if (value.items[i].propertyId.propertyId == '0') {
-        this.properties[i].property = value.items[i].propertyId.property;
-        this.properties[i].value = value.items[i].description;
-      } else {
-        this.properties[i].property = value.items[i].propertyId.propertyId;
-        this.properties[i].value = value.items[i].description;
+    this.properties=[];
+    console.log(value);
+    if (value.items.length == 0) {
+      this.properties = [];
+    }
+    else {
+      for (var i = 0; i < value.items.length; i++) {
+        if (value.items[i].propertyId.propertyId == '0') {
+          this.properties.push({ property: value.items[i].propertyId.property, value: value.items[i].description });
+        } else {
+          this.properties.push({ propertyId: value.items[i].propertyId.propertyId, value: value.items[i].description });
+        }
       }
     }
-
     let event = {
       "creatorId": "1",
       "name": value.name,
@@ -73,7 +71,7 @@ export class AddNewEventPage {
       "properties": this.properties
     };
     this.eventEngine.submitEvent(event);
-    console.log(event);
+    // console.log(event);
   }
 
   createItem(): FormGroup {
