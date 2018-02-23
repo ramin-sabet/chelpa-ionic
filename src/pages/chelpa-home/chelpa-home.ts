@@ -60,6 +60,9 @@ export class ChelpaHomePage {
   }
 
   getEvent(event) {
+    if(event.propertyId == 0){
+      this.navCtrl.push('AddNewEventPage');
+    }
     this.toggleEventDetails = !this.toggleEventDetails;
   }
 }
