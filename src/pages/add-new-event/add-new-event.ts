@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { FieldOptionsProvider } from '../../providers/field-options/field-options';
@@ -48,7 +48,6 @@ export class AddNewEventPage {
 
   submitForm(value: any) {
     this.properties=[];
-    console.log(value);
     if (value.items.length == 0) {
       this.properties = [];
     }
@@ -71,7 +70,6 @@ export class AddNewEventPage {
       "properties": this.properties
     };
     this.eventEngine.submitEvent(event);
-    // console.log(event);
   }
 
   createItem(): FormGroup {

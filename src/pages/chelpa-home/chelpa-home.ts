@@ -4,6 +4,7 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { EventSearchProvider } from '../../providers/event-search/event-search';
+import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 
 
 @IonicPage()
@@ -16,17 +17,17 @@ export class ChelpaHomePage {
 
   phoneNumber: number;
   profileName: string = '';
+  toggleEventDetails = false;
 
 
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
     navParams: NavParams, private storage: Storage,
-    public eventSearch: EventSearchProvider) {
+    public eventSearch: EventSearchProvider, private eventsDetails : EventsDetailsProvider) {
     this.profileName = navParams.get('profileName');
   }
 
   ionViewDidLoad() {
-
     //this.userInfo['appID'] = "1:264292606260:android:334752b62c4bdab7";
     console.log(this.profileName);
     this.storage.get('phoneNumber').then((val) => {
@@ -56,5 +57,9 @@ export class ChelpaHomePage {
     }).catch(err => {
       console.log(err);
     })
+  }
+
+  getEvent(event) {
+    this.toggleEventDetails = !this.toggleEventDetails;
   }
 }

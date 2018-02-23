@@ -55,7 +55,7 @@
 
       <form formArrayName="items" *ngFor="let item of newEvent.get('items').controls; let i = index;">
         <div [formGroupName]="i">
-          <ion-auto-complete formControlName="propertyId" [dataProvider]="fieldOption" placeholder="Field name" formValueAttribute="propertyId"></ion-auto-complete>
+          <ion-auto-complete formControlName="propertyId" [dataProvider]="fieldOption" placeholder="Field name"></ion-auto-complete>
           <ion-input formControlName="description" placeholder="Field description"></ion-input>
           <button ion-button alert color="danger" item-end (click)="removeItem($event,i)">
             <ion-icon name="close"></ion-icon>
