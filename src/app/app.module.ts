@@ -18,6 +18,7 @@ import { FieldOptionsProvider } from '../providers/field-options/field-options';
 import { HttpClientModule } from '@angular/common/http';
 import { AutoCompleteLocationProvider } from '../providers/auto-complete-location/auto-complete-location';
 import { EventEngineProvider } from '../providers/event-engine/event-engine';
+import { EventSearchProvider } from '../providers/event-search/event-search';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -57,7 +58,8 @@ const firebaseConfig: FirebaseAppConfig = {
     UserAuthenticationProvider,
     FieldOptionsProvider,
     AutoCompleteLocationProvider,
-    EventEngineProvider
+    EventEngineProvider,
+    EventSearchProvider
   ]
 })
 export class AppModule { }

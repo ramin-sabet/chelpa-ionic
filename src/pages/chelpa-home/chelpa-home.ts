@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { EventSearchProvider } from '../../providers/event-search/event-search';
 
 
 @IonicPage()
@@ -10,16 +11,17 @@ import * as firebase from 'firebase';
   selector: 'page-chelpa-home',
   templateUrl: 'chelpa-home.html',
 })
-export class ChelpaHomePage{
+export class ChelpaHomePage {
 
 
   phoneNumber: number;
   profileName: string = '';
-  
-  
+
+
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
-    navParams: NavParams, private storage: Storage) {
+    navParams: NavParams, private storage: Storage,
+    public eventSearch: EventSearchProvider) {
     this.profileName = navParams.get('profileName');
   }
 
@@ -28,21 +30,19 @@ export class ChelpaHomePage{
     //this.userInfo['appID'] = "1:264292606260:android:334752b62c4bdab7";
     console.log(this.profileName);
     this.storage.get('phoneNumber').then((val) => {
-   //   this.userInfo.phoneNumber = val;
+      //   this.userInfo.phoneNumber = val;
     });
     this.storage.get('userId').then((val) => {
-   //   this.userInfo.externalAppUserId = val;
+      //   this.userInfo.externalAppUserId = val;
     });
     this.storage.get('userName').then((val) => {
-    //  this.userInfo.name = val;
+      //  this.userInfo.name = val;
     });
   }
 
-  addNewEvent(){
+  addNewEvent() {
     this.navCtrl.push('AddNewEventPage');
   }
-
- 
 
   sendCode(form) {
 

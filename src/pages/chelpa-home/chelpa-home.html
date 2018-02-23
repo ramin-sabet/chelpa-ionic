@@ -8,6 +8,8 @@
   
   <ion-content padding>
     <section *ngIf="afAuth.authState | async; let user; else phForm">Welcome</section>
+    <ion-auto-complete [dataProvider]="eventSearch" placeholder="eventSearch"></ion-auto-complete>
+    
     <ion-footer>      
     <button ion-button full type="submit" (click)="addNewEvent()">Add New Event</button>
     </ion-footer>
