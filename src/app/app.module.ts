@@ -20,6 +20,7 @@ import { AutoCompleteLocationProvider } from '../providers/auto-complete-locatio
 import { EventEngineProvider } from '../providers/event-engine/event-engine';
 import { EventSearchProvider } from '../providers/event-search/event-search';
 import { EventsDetailsProvider } from '../providers/events-details/events-details';
+import { ReviewPageModule } from '../pages/review/review.module';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -45,7 +46,8 @@ const firebaseConfig: FirebaseAppConfig = {
     CodePageModule,
     ProfileInfoPageModule,
     AddNewEventPageModule,
-    HttpClientModule
+    HttpClientModule,
+    ReviewPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
