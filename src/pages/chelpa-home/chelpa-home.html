@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-auto-complete full [dataProvider]="eventSearch" placeholder="eventSearch" (itemSelected)="getEvent($event)"></ion-auto-complete>
+
   <section *ngIf="afAuth.authState | async; let user; else phForm">Welcome</section>
-  <ion-auto-complete [dataProvider]="eventSearch" placeholder="eventSearch" (itemSelected)="getEvent($event)"></ion-auto-complete>
 
   <ion-card *ngIf="toggleEventDetails">
 
@@ -33,7 +34,7 @@
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button color="primary" clear small icon-start>
+        <button ion-button color="primary" clear small icon-start (click)="rideDetails()">
           <ion-icon name='bicycle'></ion-icon>
           Providing Rides
         </button>

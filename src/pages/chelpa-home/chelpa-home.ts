@@ -65,4 +65,7 @@ export class ChelpaHomePage {
     }
     this.toggleEventDetails = !this.toggleEventDetails;
   }
+  rideDetails(){
+    this.navCtrl.push('RiderFormPage');
+  }
 }

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EventSearchProvider {
 
-  labelAttribute = "property";
+  labelAttribute = "name";
   formValueAttribute = "";
   url = 'http://shareit-sharetrip.193b.starter-ca-central-1.openshiftapps.com/';
 
@@ -14,7 +14,7 @@ export class EventSearchProvider {
   }
 
   getResults(keyword: string) {
-    return this.http.get<any>(this.url + `stories?story=${keyword}&take=5`)
+    return this.http.get<any>(this.url + `stories?story=${keyword}&take=2`)
       .map(result => {
         if (result.length === 0) {
           return [{ property: keyword, propertyId: 0 }]

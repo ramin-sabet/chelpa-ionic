@@ -17,11 +17,11 @@ export class FieldOptionsProvider implements AutoCompleteService {
 
   getResults(keyword: string) {
     return this.http.get<any>(this.url + `stories/propertynames?property=${keyword}&take=5`)
-      .map(result => {
+      .map(result => { console.log(result);
         if (result.length === 0) {
           return [{ property: keyword, propertyId: 0 }]
         } else {
-          return result
+          return result;
         }
       }
       )
