@@ -7,8 +7,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-auto-complete full [dataProvider]="eventSearch" placeholder="eventSearch" (itemSelected)="getEvent($event)"></ion-auto-complete>
+
   <section *ngIf="afAuth.authState | async; let user; else phForm">Welcome</section>
-  <ion-auto-complete [dataProvider]="eventSearch" placeholder="eventSearch" (itemSelected)="getEvent($event)"></ion-auto-complete>
 
   <ion-card *ngIf="toggleEventDetails">
 
@@ -33,8 +34,8 @@
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button color="primary" clear small icon-start>
-          <ion-icon name='bicycle'></ion-icon>
+        <button ion-button color="primary" clear small icon-start (click)="rideDetails()">
+          <ion-icon name='car'></ion-icon>
           Providing Rides
         </button>
       </ion-col>
@@ -42,12 +43,6 @@
 
   </ion-card>
 
-
-
-
-  <ion-footer>
-    <button ion-button full type="submit" (click)="addNewEvent()">Add New Event</button>
-  </ion-footer>
   <ng-template #phForm>
     <form #phoneForm="ngForm" (ngSubmit)="sendCode(phoneForm)">
       <ion-item>
@@ -59,3 +54,6 @@
   </ng-template>
   <div id="re-container"></div>
 </ion-content>
+<ion-footer>
+  <button ion-button full type="submit" (click)="addNewEvent()">Add New Event</button>
+</ion-footer>
