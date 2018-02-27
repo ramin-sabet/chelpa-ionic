@@ -23,7 +23,7 @@ export class ChelpaHomePage {
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
     navParams: NavParams, private storage: Storage,
-    public eventSearch: EventSearchProvider, private eventsDetails : EventsDetailsProvider) {
+    public eventSearch: EventSearchProvider, private eventsDetails: EventsDetailsProvider) {
     this.profileName = navParams.get('profileName');
   }
 
@@ -50,6 +50,13 @@ export class ChelpaHomePage {
     this.afAuth.auth.signInWithPhoneNumber(form.value.phoneNumber, new firebase.auth.RecaptchaVerifier('re-container', {
       'size': 'invisible'
     })).then(data => {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          user.getIdToken().then(function (data) {
+            console.log(data)
+          });
+        }
+      });
       this.storage.set('phoneNumber', form.value.phoneNumber);
       this.navCtrl.push('CodePage', {
         confirmationResult: data
@@ -60,12 +67,12 @@ export class ChelpaHomePage {
   }
 
   getEvent(event) {
-    if(event.propertyId == 0){
+    if (event.propertyId == 0) {
       this.navCtrl.push('AddNewEventPage');
     }
     this.toggleEventDetails = !this.toggleEventDetails;
   }
-  rideDetails(){
+  rideDetails() {
     this.navCtrl.push('RiderFormPage');
   }
 }

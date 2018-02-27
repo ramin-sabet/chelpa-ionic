@@ -17,7 +17,7 @@ export class EventSearchProvider {
     return this.http.get<any>(this.url + `stories?story=${keyword}&take=2`)
       .map(result => {
         if (result.length === 0) {
-          return [{ property: keyword, propertyId: 0 }]
+          return [{ name: keyword, propertyId: 0 }]
         } else {
           return result
         }

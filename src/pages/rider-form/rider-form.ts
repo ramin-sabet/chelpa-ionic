@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AutoCompleteLocationProvider } from '../../providers/auto-complete-location/auto-complete-location';
+import { FieldOptionsProvider } from '../../providers/field-options/field-options';
 
 
 
@@ -17,7 +18,7 @@ export class RiderFormPage {
   properties: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
-    public autoComplete: AutoCompleteLocationProvider) {
+    public autoComplete: AutoCompleteLocationProvider,public fieldOption: FieldOptionsProvider) {
     this.rideDetails = this.formBuilder.group({
       From: ['', Validators.required],
       To: ['', Validators.required],

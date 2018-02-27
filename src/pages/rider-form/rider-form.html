@@ -1,80 +1,86 @@
-
 <ion-header>
-
   <ion-navbar>
     <ion-title>rider-form</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-    <form [formGroup]="rideDetails" (ngSubmit)="submitForm(rideDetails.value)">
-        <ion-list>
-            <ion-auto-complete class="ion-item" formControlName="From" [dataProvider]="autoComplete" placeholder="From:"></ion-auto-complete>
-          <ion-item *ngIf="rideDetails.controls['From'].hasError('required') && rideDetails.controls['From'].touched">
-            <p> *This field is required</p>
-          </ion-item>
-    
-          <ion-auto-complete class="ion-item" formControlName="To" [dataProvider]="autoComplete" placeholder="To:"></ion-auto-complete>
-    
-          <ion-item *ngIf="rideDetails.controls['To'].hasError('required') && rideDetails.controls['To'].touched">
-            <p> *This field is required</p>
-          </ion-item>
-    
-          <ion-item>
-            <ion-label>
-              Time
-            </ion-label>
-            <ion-datetime formControlName="time" displayFormat="D MMM YYYY" min="1990-02" max="2010-10" [(ngModel)]="webkitReleased"></ion-datetime>
-            <ion-datetime formControlName="time" displayFormat="hh:mm A" [(ngModel)]="tokyoTime"></ion-datetime>
-          </ion-item>
-    
-          <ion-item>
-            <ion-label>
-              Guest Numbers
-            </ion-label>
-            <ion-input type="number" formControlName="guestNumbers"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="rideDetails.controls['guestNumbers'].hasError('required') && rideDetails.controls['guestNumbers'].touched">
-            <p> *Guest Numbers is required</p>
-          </ion-item>
-    
-          <ion-item>
-            <ion-label>
-              Costs
-            </ion-label>
-            <ion-input type="number" formControlName="costs"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="rideDetails.controls['costs'].hasError('required') && rideDetails.controls['costs'].touched">
-            <p> *Costs is required{{rideDetails.controls['costs']}}</p>
-          </ion-item>
-    
-          <form formArrayName="items" *ngFor="let item of rideDetails.get('items').controls; let i = index;">
-            <div [formGroupName]="i">
-              <ion-auto-complete formControlName="propertyId" [dataProvider]="fieldOption" placeholder="Field name"></ion-auto-complete>
-              <ion-input formControlName="description" placeholder="Field description"></ion-input>
-              <button ion-button alert color="danger" item-end (click)="removeItem($event,i)">
-                <ion-icon name="close"></ion-icon>
-              </button>
-            </div>
-            <ion-item *ngIf="(rideDetails.controls['items'].controls[i].controls['propertyId'].hasError('required') && rideDetails.controls['items'].controls[i].controls['propertyId'].touched) || 
+  <form [formGroup]="rideDetails" (ngSubmit)="submitForm(rideDetails.value)">
+    <ion-list>
+      <ion-auto-complete formControlName="From" [dataProvider]="autoComplete" [options]="{ placeholder : 'From' }"></ion-auto-complete>
+      <ion-item *ngIf="rideDetails.controls['From'].hasError('required') && rideDetails.controls['From'].touched">
+        <p> *This field is required</p>
+      </ion-item>
+
+      <ion-auto-complete formControlName="To" [dataProvider]="autoComplete" [options]="{ placeholder : 'To' }"></ion-auto-complete>
+
+      <ion-item *ngIf="rideDetails.controls['To'].hasError('required') && rideDetails.controls['To'].touched">
+        <p> *This field is required</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Time
+        </ion-label>
+        <ion-datetime formControlName="time" displayFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Guest Numbers
+        </ion-label>
+        <ion-input type="number" formControlName="guestNumbers"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="rideDetails.controls['guestNumbers'].hasError('required') && rideDetails.controls['guestNumbers'].touched">
+        <p> *Guest Numbers is required</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          Costs
+        </ion-label>
+        <ion-input type="number" formControlName="costs"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="rideDetails.controls['costs'].hasError('required') && rideDetails.controls['costs'].touched">
+        <p> *Costs is required{{rideDetails.controls['costs']}}</p>
+      </ion-item>
+
+      <form formArrayName="items" *ngFor="let item of rideDetails.get('items').controls; let i = index;">
+        <div [formGroupName]="i">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-auto-complete formControlName="propertyId" [dataProvider]="fieldOption" [options]="{ placeholder : 'Field Name' }"></ion-auto-complete>
+              </ion-col>
+              <ion-col>
+                <ion-input formControlName="description" placeholder="Field description"></ion-input>
+              </ion-col>
+              <ion-col col-1>
+                <button ion-button alert color="danger" item-end (click)="removeItem($event,i)">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <ion-item *ngIf="(rideDetails.controls['items'].controls[i].controls['propertyId'].hasError('required') && rideDetails.controls['items'].controls[i].controls['propertyId'].touched) || 
             (rideDetails.controls['items'].controls[i].controls['description'].hasError('required') && rideDetails.controls['items'].controls[i].controls['description'].touched)">
-              <p> *Field name and field description is required(You may remove the row to continue)</p>
-            </ion-item>
-          </form>
-    
-          <button ion-button icon-start (click)="addItem($event)">
-            <ion-label>
-              <ion-icon name="add"></ion-icon>
-              Add More Fields
-            </ion-label>
-          </button>
-    
-        </ion-list>
-    
-        <button clear ion-button [disabled]="!rideDetails.valid">Submit</button>
-     
+          <p> *Field name and field description is required(You may remove the row to continue)</p>
+        </ion-item>
       </form>
+
+      <button ion-button icon-start (click)="addItem($event)">
+        <ion-label>
+          <ion-icon name="add"></ion-icon>
+          Add More Fields
+        </ion-label>
+      </button>
+
+    </ion-list>
+
+    <button clear ion-button [disabled]="!rideDetails.valid">Submit</button>
+
+  </form>
 
 </ion-content>
