@@ -12,6 +12,7 @@ import { ProfileInfoPageModule } from '../pages/profile-info/profile-info.module
 import { AddNewEventPageModule } from '../pages/add-new-event/add-new-event.module';
 import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { UserAuthenticationProvider } from '../providers/user-authentication/user-authentication';
 import { FieldOptionsProvider } from '../providers/field-options/field-options';
@@ -48,7 +49,8 @@ const firebaseConfig: FirebaseAppConfig = {
     ProfileInfoPageModule,
     AddNewEventPageModule,
     HttpClientModule,
-    ReviewPageModule
+    ReviewPageModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

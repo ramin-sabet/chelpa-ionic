@@ -11,11 +11,11 @@ import { AvailableRidesProvider } from '../../providers/available-rides/availabl
 })
 export class ExistingRidesPage {
 
-  items: any[];
+  rides: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, public availableRides : AvailableRidesProvider) {
-      this.items = availableRides.getDetails();
+      this.rides = availableRides.getDetails();
   }
 
   ionViewDidLoad() {
@@ -25,15 +25,36 @@ export class ExistingRidesPage {
   doInfinite(infiniteScroll) {
     this.availableRides.getAsyncData().then((newData) => {
       for (var i = 0; i < newData.length; i++) {
-        this.items.push( newData[i] );
+        this.rides.push( newData[i] );
       }
 
       infiniteScroll.complete();
 
-      if (this.items.length > 10) {
+      if (this.rides.length > 90) {
         infiniteScroll.enable(false);
       }
     });
+  }
+
+
+  more(item) {
+
+  }
+
+  delete(item) {
+ 
+  }
+
+  mute(item) {
+    
+  }
+
+  archive(item) {
+    
+  }
+
+  download(item) {
+    
   }
 
   openMenu() {
