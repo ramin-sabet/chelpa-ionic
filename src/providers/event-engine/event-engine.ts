@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class EventEngineProvider {
 
-  url = "http://shareit-sharetrip.193b.starter-ca-central-1.openshiftapps.com/stories";
+  url = "http://localhost:3000/api/events";
 
   constructor(public http: HttpClient) {
     console.log('Hello EventEngineProvider Provider');
