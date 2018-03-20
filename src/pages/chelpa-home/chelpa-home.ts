@@ -20,7 +20,6 @@ export class ChelpaHomePage {
   toggleEventDetails = false;
 
 
-
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
     navParams: NavParams, private storage: Storage,
     public eventSearch: EventSearchProvider, private eventsDetails: EventsDetailsProvider) {
@@ -53,10 +52,12 @@ export class ChelpaHomePage {
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           user.getIdToken().then(function (data) {
-            console.log(data)
+            console.log(data);
+            this.storage.set('idToken', data);
           });
         }
       });
+
       this.storage.set('phoneNumber', form.value.phoneNumber);
       this.navCtrl.push('CodePage', {
         confirmationResult: data
@@ -77,7 +78,7 @@ export class ChelpaHomePage {
     this.navCtrl.push('RiderFormPage');
   }
 
-  existingRides(){
+  existingRides() {
     this.navCtrl.push('ExistingRidesPage');
   }
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class EventEngineProvider {
 
-  url = "http://localhost:3000/api/events";
+  url = "http://localhost:3000/api/v1/events";
 
   constructor(public http: HttpClient) {
     console.log('Hello EventEngineProvider Provider');

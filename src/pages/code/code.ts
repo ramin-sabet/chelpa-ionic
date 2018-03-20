@@ -16,6 +16,7 @@ export class CodePage {
 
   confirmationResult;
   code;
+  userMock = {username : "RaminSabet", password : "sas"};
 
   userToken: any;
   MockReturn :any;
@@ -34,8 +35,10 @@ export class CodePage {
   }
 
   getMessages(value:any){
-    this.MockReturn = this.userAth.registerUser(this.userInfo)
-    console.log(this.MockReturn);
+    // this.MockReturn = this.userAth.registerUser(this.userInfo)
+    this.userAth.registerUser(this.userMock);
+    console.log("-----------------------log1");
+    //  console.log(this.MockReturn);
     // .subscribe(data => { 
     //   console.log(data);
     //   this.userToken = data; });
