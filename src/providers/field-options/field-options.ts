@@ -7,21 +7,21 @@ import 'rxjs/add/operator/map';
 export class FieldOptionsProvider implements AutoCompleteService {
 
   modifiedData: any;
-  labelAttribute = "property";
+  labelAttribute = "name";
   formValueAttribute = "";
-  url = 'http://shareit-sharetrip.193b.starter-ca-central-1.openshiftapps.com/';
+  url = 'http://localhost:3000/api/v1/';
 
   constructor(public http: HttpClient) {
     console.log('Hello FieldOptionsProvider Provider');
   }
 
   getResults(keyword: string) {
-    return this.http.get<any>(this.url + `stories/propertynames?property=${keyword}&take=5`)
+    return this.http.get<any>(this.url + `providedOptions?keyword=${keyword}&limit=3`)
       .map(result => { console.log(result);
-        if (result.length === 0) {
-          return [{ property: keyword, propertyId: 0 }]
+        if (result.data.length === 0) {
+          return [{ name: keyword, propertyId: 0 }]
         } else {
-          return result;
+          return result.data;
         }
       }
       )
