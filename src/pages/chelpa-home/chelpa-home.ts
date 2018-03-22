@@ -14,10 +14,11 @@ import { EventsDetailsProvider } from '../../providers/events-details/events-det
 })
 export class ChelpaHomePage {
 
-
+  rsp : any;
   phoneNumber: number;
   profileName: string = '';
   toggleEventDetails = false;
+  eventObject = '';
 
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
@@ -51,10 +52,17 @@ export class ChelpaHomePage {
     })).then(data => {
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          user.getIdToken().then(function (data) {
-            console.log(data);
-            this.storage.set('idToken', data);
+          user.getIdToken(true).then( (token) => {
+            console.log(token);
+            // this.rsp.writeHead(200, {"Content-Type": "application/json"});
+            // this.rsp.end(JSON.stringify({token:token})); 
+          }).catch((err)=>{
+            // this.rsp.writeHead(500, {"Content-Type": "application/json"});
+            // this.rsp.end(JSON.stringify({error:err}));
           });
+        }else{
+          // this.rsp.writeHead(500, {"Content-Type": "application/json"});
+          // this.rsp.end(JSON.stringify('error - no key'));
         }
       });
 
@@ -70,8 +78,12 @@ export class ChelpaHomePage {
   getEvent(event) {
     if (event.propertyId == 0) {
       this.navCtrl.push('AddNewEventPage');
+    } else {
+      this.eventsDetails.getDetails(event._id)
+        .subscribe((result) => {
+          this.navCtrl.push('DisplayEventPage', { result: result });
+        })
     }
-    this.toggleEventDetails = !this.toggleEventDetails;
   }
 
   rideDetails() {

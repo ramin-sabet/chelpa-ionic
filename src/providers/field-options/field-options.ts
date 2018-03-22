@@ -16,7 +16,7 @@ export class FieldOptionsProvider implements AutoCompleteService {
   }
 
   getResults(keyword: string) {
-    return this.http.get<any>(this.url + `providedOptions?keyword=${keyword}&limit=3`)
+    return this.http.get<any>(this.url + `options?keyword=${keyword}&limit=3`)
       .map(result => { console.log(result);
         if (result.data.length === 0) {
           return [{ name: keyword, propertyId: 0 }]
