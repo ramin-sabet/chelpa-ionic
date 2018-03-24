@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AutoCompleteLocationProvider } from '../../providers/auto-complete-location/auto-complete-location';
 import { FieldOptionsProvider } from '../../providers/field-options/field-options';
-
+import { RideEngineProvider } from '../../providers/ride-engine/ride-engine';
 
 
 @IonicPage()
@@ -18,7 +18,8 @@ export class RiderFormPage {
   properties: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
-    public autoComplete: AutoCompleteLocationProvider,public fieldOption: FieldOptionsProvider) {
+    public autoComplete: AutoCompleteLocationProvider, public fieldOption: FieldOptionsProvider,
+    public riderEngine: RideEngineProvider) {
     this.rideDetails = this.formBuilder.group({
       From: ['', Validators.required],
       To: ['', Validators.required],
@@ -35,29 +36,29 @@ export class RiderFormPage {
   }
 
   submitForm(value: any) {
-    this.properties = [];
-    if (value.items.length == 0) {
-      this.properties = [];
-    }
-    else {
-      for (var i = 0; i < value.items.length; i++) {
-        if (value.items[i].propertyId.propertyId == '0') {
-          this.properties.push({ property: value.items[i].propertyId.property, value: value.items[i].description });
-        } else {
-          this.properties.push({ propertyId: value.items[i].propertyId.propertyId, value: value.items[i].description });
-        }
-      }
-    }
-    let event = {
+    // this.properties = [];
+    // if (value.items.length == 0) {
+    //   this.properties = [];
+    // }
+    // else {
+    //   for (var i = 0; i < value.items.length; i++) {
+    //     if (value.items[i].propertyId.propertyId == '0') {
+    //       this.properties.push({ property: value.items[i].propertyId.property, value: value.items[i].description });
+    //     } else {
+    //       this.properties.push({ propertyId: value.items[i].propertyId.propertyId, value: value.items[i].description });
+    //     }
+    //   }
+    // }
+    let ride = {
       "creatorId": "1",
-      "name": value.name,
+      "From": value.From,
+      "To": value.To,
       "time": value.time,
-      "price": value.costs,
-      "location": value.location,
-      "capacity": value.guestNumbers,
+      "guestNumbers": value.guestNumbers,
+      "costs": value.costs,
       "properties": this.properties
     };
-    // this.eventEngine.submitEvent(event);
+    this.riderEngine.submitRide(ride);
   }
 
   createItem(): FormGroup {

@@ -24,6 +24,7 @@ import { EventsDetailsProvider } from '../providers/events-details/events-detail
 import { ReviewPageModule } from '../pages/review/review.module';
 import { AvailableRidesProvider } from '../providers/available-rides/available-rides';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
+import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -69,7 +70,8 @@ const firebaseConfig: FirebaseAppConfig = {
     EventSearchProvider,
     EventsDetailsProvider,
     AvailableRidesProvider,
-    AuthServiceProvider
+    AuthServiceProvider,
+    RideEngineProvider
   ]
 })
 export class AppModule { }

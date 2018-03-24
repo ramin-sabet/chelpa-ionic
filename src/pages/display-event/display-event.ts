@@ -21,4 +21,12 @@ export class DisplayEventPage {
     console.log('ionViewDidLoad DisplayEventPage');
   }
 
+  rideDetails() {
+    this.navCtrl.push('RiderFormPage');
+  }
+
+  existingRides() {
+    this.navCtrl.push('ExistingRidesPage');
+  }
+
 }

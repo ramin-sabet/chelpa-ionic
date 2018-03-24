@@ -85,12 +85,4 @@ export class ChelpaHomePage {
         })
     }
   }
-
-  rideDetails() {
-    this.navCtrl.push('RiderFormPage');
-  }
-
-  existingRides() {
-    this.navCtrl.push('ExistingRidesPage');
-  }
 }

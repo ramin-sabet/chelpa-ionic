@@ -4,16 +4,16 @@ import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
 
 
 @Injectable()
-export class EventEngineProvider {
+export class RideEngineProvider {
 
-  url = "http://localhost:3000/api/v1/events";
+  url = "http://localhost:3000/api/v1/riders";
   returnedData: any;
 
   constructor(public http: HttpClient, private authService: AuthServiceProvider) {
     console.log('Hello EventEngineProvider Provider');
   }
 
-  submitEvent(param: any) {
+  submitRide(param: any) {
 
     this.authService.getTokenHeader().then((data) => {
       this.returnedData = data;
