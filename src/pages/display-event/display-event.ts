@@ -10,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DisplayEventPage {
 
-  eventObject : any;
+  eventObject: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.eventObject = navParams.get('result');
@@ -22,7 +22,9 @@ export class DisplayEventPage {
   }
 
   rideDetails() {
-    this.navCtrl.push('RiderFormPage');
+    this.navCtrl.push('RiderFormPage', {
+      param1: this.eventObject
+    });
   }
 
   existingRides() {

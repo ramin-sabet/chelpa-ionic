@@ -16,6 +16,7 @@ export class RiderFormPage {
   private rideDetails: FormGroup;
   items: FormArray;
   properties: any = [];
+  eventObject;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public autoComplete: AutoCompleteLocationProvider, public fieldOption: FieldOptionsProvider,
@@ -28,6 +29,8 @@ export class RiderFormPage {
       costs: ['0', Validators.required],
       items: this.formBuilder.array([this.createItem()])
     });
+    this.eventObject = navParams.get('param1');
+    console.log(this.eventObject.data._id);
   }
 
   ionViewDidLoad() {
@@ -58,7 +61,7 @@ export class RiderFormPage {
       "costs": value.costs,
       "properties": this.properties
     };
-    this.riderEngine.submitRide(ride);
+    this.riderEngine.submitRide(this.eventObject.data._id, ride);
   }
 
   createItem(): FormGroup {
