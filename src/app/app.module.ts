@@ -23,7 +23,6 @@ import { EventSearchProvider } from '../providers/event-search/event-search';
 import { EventsDetailsProvider } from '../providers/events-details/events-details';
 import { ReviewPageModule } from '../pages/review/review.module';
 import { AvailableRidesProvider } from '../providers/available-rides/available-rides';
-import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
 
 const firebaseConfig: FirebaseAppConfig = {
@@ -70,7 +69,6 @@ const firebaseConfig: FirebaseAppConfig = {
     EventSearchProvider,
     EventsDetailsProvider,
     AvailableRidesProvider,
-    AuthServiceProvider,
     RideEngineProvider
   ]
 })

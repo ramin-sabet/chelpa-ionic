@@ -1,22 +1,27 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { Storage } from '@ionic/storage';
 
 
 @Injectable()
 export class EventsDetailsProvider {
 
   url = 'http://localhost:3000/api/v1/';
-  returnedData: any;
+  returnedData;
 
-  constructor(public http: HttpClient, private authService: AuthServiceProvider) {}
+  constructor(public http: HttpClient, private storage: Storage) { }
 
   getDetails(eventId: string): Observable<any> {
 
-    this.authService.getTokenHeader().then((data) => {
-      this.returnedData = data;
-    })
+    this.storage.get('firebaseToken').then((val) => {
+      this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('authorization', 'Bearer ' + val);
+    });
+
+    // this.authService.getTokenHeader().then((data) => {
+    //   this.returnedData = data;
+    // })
 
     return this.http.get<any>(this.url + `events/${eventId}`, { headers: this.returnedData })
   }

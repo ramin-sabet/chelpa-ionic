@@ -3,8 +3,6 @@ import { Storage} from '@ionic/storage';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProfileInfoPage } from '../profile-info/profile-info'
 import * as firebase from 'firebase';
-import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
-
 
 
 @IonicPage()
@@ -15,33 +13,10 @@ import { UserAuthenticationProvider } from '../../providers/user-authentication/
 export class CodePage {
 
   confirmationResult;
-  code;
-  userMock = {username : "RaminSabet", password : "sas"};
 
-  userToken: any;
-  MockReturn :any;
 
-  userInfo: AppUserRegister = {
-    phoneNumber: 6565,
-    externalAppUserId: "AA4444",
-    name: "Ramin",
-    appID: "34343gf"
-  };
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
-    public userAth: UserAuthenticationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
     this.confirmationResult = this.navParams.get('confirmationResult');
-      this.getMessages(this.userInfo);
-  }
-
-  getMessages(value:any){
-    // this.MockReturn = this.userAth.registerUser(this.userInfo)
-    this.userAth.registerUser(this.userMock);
-    console.log("-----------------------log1");
-    //  console.log(this.MockReturn);
-    // .subscribe(data => { 
-    //   console.log(data);
-    //   this.userToken = data; });
   }
 
 

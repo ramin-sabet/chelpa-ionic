@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class EventSearchProvider {
@@ -13,13 +13,16 @@ export class EventSearchProvider {
 
 
 
-  constructor(public http: HttpClient, private authService: AuthServiceProvider) {}
+  constructor(public http: HttpClient, public storage: Storage) { }
 
   getResults(keyword: string): Observable<any> {
-    
-    this.authService.getTokenHeader().then((data) => {
-      this.returnedData = data;
-    })
+
+    this.storage.get('firebaseToken').then((val) => {
+      this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('authorization', 'Bearer ' + val);
+      console.log(val);
+      console.log(this.returnedData);
+    });
 
     return this.http.get<any>(this.url + `events?keyword=${keyword}&limit=2`, { headers: this.returnedData })
       .map(result => {

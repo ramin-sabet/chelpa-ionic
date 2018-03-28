@@ -14,11 +14,12 @@ import { EventsDetailsProvider } from '../../providers/events-details/events-det
 })
 export class ChelpaHomePage {
 
-  rsp : any;
+  rsp: any;
   phoneNumber: number;
   profileName: string = '';
   toggleEventDetails = false;
   eventObject = '';
+  userName: string = '';
 
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
@@ -37,7 +38,7 @@ export class ChelpaHomePage {
       //   this.userInfo.externalAppUserId = val;
     });
     this.storage.get('userName').then((val) => {
-      //  this.userInfo.name = val;
+      // this.userName = val;
     });
   }
 
@@ -50,21 +51,17 @@ export class ChelpaHomePage {
     this.afAuth.auth.signInWithPhoneNumber(form.value.phoneNumber, new firebase.auth.RecaptchaVerifier('re-container', {
       'size': 'invisible'
     })).then(data => {
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          user.getIdToken(true).then( (token) => {
-            console.log(token);
-            // this.rsp.writeHead(200, {"Content-Type": "application/json"});
-            // this.rsp.end(JSON.stringify({token:token})); 
-          }).catch((err)=>{
-            // this.rsp.writeHead(500, {"Content-Type": "application/json"});
-            // this.rsp.end(JSON.stringify({error:err}));
-          });
-        }else{
-          // this.rsp.writeHead(500, {"Content-Type": "application/json"});
-          // this.rsp.end(JSON.stringify('error - no key'));
-        }
-      });
+      // firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+      //   console.log("SENDCODE");
+      //   console.log(idToken);
+      //   this.storage.set('firebaseToken', idToken);
+
+      //   // this.rsp.writeHead(200, {"Content-Type": "application/json"});
+      //   // this.rsp.end(JSON.stringify({token:token})); 
+      // }).catch((err) => {
+      //   // this.rsp.writeHead(500, {"Content-Type": "application/json"});
+      //   // this.rsp.end(JSON.stringify({error:err}));
+      // });
 
       this.storage.set('phoneNumber', form.value.phoneNumber);
       this.navCtrl.push('CodePage', {
