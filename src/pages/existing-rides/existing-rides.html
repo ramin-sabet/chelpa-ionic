@@ -19,8 +19,8 @@
         <ion-thumbnail item-start>
           <img src="assets/imgs/logo.png">
         </ion-thumbnail>
-        <h2>{{ride.name}}</h2>
-        <p>{{ride.address}}</p>
+        <h2>{{ride.From}}</h2>
+        <p>{{ride.To}}</p>
         <button ion-button clear item-end (click)="showDetails(i)">View</button>
       </ion-item>
 
@@ -45,10 +45,10 @@
 
     </ion-item-sliding>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    </ion-infinite-scroll> -->
 
 
   </ion-list>

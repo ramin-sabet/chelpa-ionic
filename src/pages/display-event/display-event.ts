@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
+
 
 
 
@@ -11,14 +13,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class DisplayEventPage {
 
   eventObject: any;
+  rides: any[];
+  arrayRides: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public availableRides: AvailableRidesProvider) {
     this.eventObject = navParams.get('result');
-    console.log(this.eventObject);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DisplayEventPage');
   }
 
   rideDetails() {
@@ -28,7 +31,18 @@ export class DisplayEventPage {
   }
 
   existingRides() {
-    this.navCtrl.push('ExistingRidesPage');
+    this.availableRides.getAsyncData(this.eventObject.data._id)
+      .subscribe((data => {
+        this.rides = data.data.rides;
+        console.log(this.rides);
+        for (var i = 0; i < this.rides.length; i++) {
+          this.arrayRides.push({ 'From': this.rides[i].from, 'To': this.rides[i].to })
+        }
+      }));
+    this.navCtrl.push('ExistingRidesPage', {
+      param1: this.eventObject.data._id,
+      param2: this.arrayRides
+    });
   }
 
 }

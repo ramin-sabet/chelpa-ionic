@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular';
-import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
 
 
 @IonicPage()
@@ -11,29 +10,17 @@ import { AvailableRidesProvider } from '../../providers/available-rides/availabl
 })
 export class ExistingRidesPage {
 
-  rides: any[];
+  rides;
+  objectId;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController, public availableRides : AvailableRidesProvider) {
-      this.rides = availableRides.getDetails();
+    public actionsheetCtrl: ActionSheetController) {
+    this.objectId = navParams.get('param1');
+    this.rides = navParams.get('param2');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ExistingRidesPage');
-  }
-
-  doInfinite(infiniteScroll) {
-    this.availableRides.getAsyncData().then((newData) => {
-      for (var i = 0; i < newData.length; i++) {
-        this.rides.push( newData[i] );
-      }
-
-      infiniteScroll.complete();
-
-      if (this.rides.length > 90) {
-        infiniteScroll.enable(false);
-      }
-    });
   }
 
 
@@ -42,19 +29,19 @@ export class ExistingRidesPage {
   }
 
   delete(item) {
- 
+
   }
 
   mute(item) {
-    
+
   }
 
   archive(item) {
-    
+
   }
 
   download(item) {
-    
+
   }
 
   openMenu() {
@@ -96,7 +83,7 @@ export class ExistingRidesPage {
     actionSheet.present();
   }
 
-  showDetails(i){
+  showDetails(i) {
     console.log(i);
   }
 }

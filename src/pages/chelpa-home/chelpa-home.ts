@@ -29,8 +29,6 @@ export class ChelpaHomePage {
   }
 
   ionViewDidLoad() {
-    //this.userInfo['appID'] = "1:264292606260:android:334752b62c4bdab7";
-    console.log(this.profileName);
     this.storage.get('phoneNumber').then((val) => {
       //   this.userInfo.phoneNumber = val;
     });
@@ -51,18 +49,6 @@ export class ChelpaHomePage {
     this.afAuth.auth.signInWithPhoneNumber(form.value.phoneNumber, new firebase.auth.RecaptchaVerifier('re-container', {
       'size': 'invisible'
     })).then(data => {
-      // firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
-      //   console.log("SENDCODE");
-      //   console.log(idToken);
-      //   this.storage.set('firebaseToken', idToken);
-
-      //   // this.rsp.writeHead(200, {"Content-Type": "application/json"});
-      //   // this.rsp.end(JSON.stringify({token:token})); 
-      // }).catch((err) => {
-      //   // this.rsp.writeHead(500, {"Content-Type": "application/json"});
-      //   // this.rsp.end(JSON.stringify({error:err}));
-      // });
-
       this.storage.set('phoneNumber', form.value.phoneNumber);
       this.navCtrl.push('CodePage', {
         confirmationResult: data
