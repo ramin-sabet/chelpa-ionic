@@ -16,7 +16,7 @@ export class AvailableRidesProvider {
       this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
         .set('authorization', 'Bearer ' + val);
     });
-    return this.http.get<any>(this.url + `rides/5aafe27622a6d70e304de927`, { headers: this.returnedData });
+    return this.http.get<any>(this.url + `rides/${eventId}`, { headers: this.returnedData });
 
   }
 }

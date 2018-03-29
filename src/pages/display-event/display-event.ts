@@ -31,8 +31,10 @@ export class DisplayEventPage {
   }
 
   existingRides() {
+    
     this.availableRides.getAsyncData(this.eventObject.data._id)
       .subscribe((data => {
+        
         this.rides = data.data.rides;
         console.log(this.rides);
         for (var i = 0; i < this.rides.length; i++) {
@@ -43,6 +45,7 @@ export class DisplayEventPage {
       param1: this.eventObject.data._id,
       param2: this.arrayRides
     });
+    this.arrayRides = [];
   }
 
 }
