@@ -10,7 +10,7 @@ import { ChelpaHomePageModule } from '../pages/chelpa-home/chelpa-home.module';
 import { CodePageModule } from '../pages/code/code.module';
 import { ProfileInfoPageModule } from '../pages/profile-info/profile-info.module';
 import { AddNewEventPageModule } from '../pages/add-new-event/add-new-event.module';
-import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
+import { TermsAndConditionsPageModule } from '../pages/terms-and-conditions/terms-and-conditions.module';
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -37,13 +37,14 @@ const firebaseConfig: FirebaseAppConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    TermsAndConditionsPage
+    // TermsAndConditionsPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
+    TermsAndConditionsPageModule,
     AngularFireAuthModule,
     ChelpaHomePageModule,
     CodePageModule,
@@ -56,7 +57,7 @@ const firebaseConfig: FirebaseAppConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TermsAndConditionsPage
+  //  TermsAndConditionsPage
   ],
   providers: [
     StatusBar,

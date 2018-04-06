@@ -1,18 +1,23 @@
 <ion-content padding>
-    <div class="gradient">
-      <div text-center class="title">
-        Welcome to Chelpa
-      </div>
-      <div class="bg-image">
-  
-      </div>
-  
-      <div padding class="footer">
-        <p style="margin-right:20px">
-          Please accept Chalpa
-          <a href="http://ionicframework.com/docs/v2">terms and conditions</a> by pressing confirm and continue
-        </p>
-        <button ion-button large (click)="gotoHomePage()">CONFIRM AND CONTINUE</button>
+  <div class="gradient">
+    <div text-center class="title">
+      Welcome to Chelpa
+    </div>
+    <div class="row">
+      <div class="col-md-6 " id="img1">
+        <img src="../assets/imgs/firstPageImage.png" class="img-responsive " id="img1">
       </div>
     </div>
-  </ion-content>
+    <!-- <div text-center>
+        <ion-img width="180" height="180" src="../assets/imgs/firstPageImage.png"></ion-img>  
+     </div> -->
+
+    <div padding class="footer">
+      <p style="margin-right:20px">
+        Please accept Chalpa
+        <a href="http://ionicframework.com/docs/v2">terms and conditions</a> by pressing confirm and continue
+      </p>
+      <button ion-button (click)="gotoHomePage()">CONFIRM AND CONTINUE</button>
+    </div>
+  </div>
+</ion-content>

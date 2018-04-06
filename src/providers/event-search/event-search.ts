@@ -20,6 +20,7 @@ export class EventSearchProvider {
     this.storage.get('firebaseToken').then((val) => {
       this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
         .set('authorization', 'Bearer ' + val);
+        console.log('EVENT_SEARCH'); 
       console.log(val);
       console.log(this.returnedData);
     });

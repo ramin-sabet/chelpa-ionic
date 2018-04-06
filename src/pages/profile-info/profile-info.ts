@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 export class ProfileInfoPage {
 
   profileName: string = '';
-  token: string = '';
+  token = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage,
     public userAuth: UserAuthenticationProvider) {
@@ -22,34 +22,21 @@ export class ProfileInfoPage {
   ionViewDidLoad() {
   }
 
-  gotoHomePage() {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        console.log("SENDCODE");
-        console.log(user['pa']);
-        this.token = user['pa'];
+  async gotoHomePage() {
+    let token = {};
+
+    await firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {    
+        token = user;
       } else {
         // No user is signed in.
       }
-      console.log("SENDCODEdadadadadadadada");
-      console.log(this.token);
-      this.storage.set('firebaseToken', this.token);
     });
+   
+    this.storage.remove('firebaseToken');
+    this.storage.set('firebaseToken', token['pa']);
+    this.userAuth.registerUser(token, this.profileName);
 
-    // firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
-    //   console.log("SENDCODE");
-    //   console.log(idToken);
-    //   this.storage.set('firebaseToken', idToken);
-
-    //   // this.rsp.writeHead(200, {"Content-Type": "application/json"});
-    //   // this.rsp.end(JSON.stringify({token:token})); 
-    // }).catch((err) => {
-    //   // this.rsp.writeHead(500, {"Content-Type": "application/json"});
-    //   // this.rsp.end(JSON.stringify({error:err}));
-    // });
-    console.log('ionViewDidLoad ProfileInfoPage');
-    console.log(this.profileName);
-    this.userAuth.registerUser(this.profileName);
     this.navCtrl.setRoot('ChelpaHomePage');
     this.storage.set('userName', this.profileName);
   }
