@@ -24,6 +24,8 @@ import { EventsDetailsProvider } from '../providers/events-details/events-detail
 import { ReviewPageModule } from '../pages/review/review.module';
 import { AvailableRidesProvider } from '../providers/available-rides/available-rides';
 import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -57,7 +59,7 @@ const firebaseConfig: FirebaseAppConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-  //  TermsAndConditionsPage
+    //  TermsAndConditionsPage
   ],
   providers: [
     StatusBar,
@@ -70,7 +72,9 @@ const firebaseConfig: FirebaseAppConfig = {
     EventSearchProvider,
     EventsDetailsProvider,
     AvailableRidesProvider,
-    RideEngineProvider
+    RideEngineProvider,
+    Camera,
+    FileTransfer
   ]
 })
 export class AppModule { }

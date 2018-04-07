@@ -2,35 +2,65 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/do';
 import { Storage } from '@ionic/storage';
-
+import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
 
 @Injectable()
 export class UserAuthenticationProvider {
 
-  url = 'http://localhost:3000/api/v1/';
+  url = 'http://localhost:3000/api/v1/users';
   returnedData;
   user: any = {};
 
-  constructor(private http: HttpClient, private storage: Storage) {
+  constructor(private http: HttpClient, private storage: Storage,
+              private transfer:FileTransfer) {
 
   }
 
+  uploadImage(img, desc): any {
+ 
+    // // Destination URL
+    // let url = this.apiURL + 'images';
+ 
+    // // File for Upload
+    var targetPath = img;
+ 
+    var options: FileUploadOptions = {
+      fileKey: 'image',
+      chunkedMode: false,
+      mimeType: 'multipart/form-data',
+      params: { 'desc': desc }
+    };
+  }
+
   registerUser(token, profileName) {
-    this.user.userId = token['uid'];
-    this.user.userName = profileName;
-    this.user.phoneNumber = token['phoneNumber'];
-
-    console.log('Hello UserAuthenticationProvider Provider');
-    console.log(this.user);
     
+    // var options: FileUploadOptions = {
+    //   fileKey: 'image',
+    //   chunkedMode: false,
+    //   mimeType: 'multipart/form-data',
+    //   params: {'desc': desc, 'userId':token['uid'], 'userName': profileName, 'phoneNumber':token['phoneNumber']}
+
+    // }    
+    const FileTransfer = this.transfer.create();
+
+    // return FileTransfer.upload(img, this.url, options);
+   
+   
+    // this.user.userId = token['uid'];
+    // this.user.userName = profileName;
+    // this.user.phoneNumber = token['phoneNumber'];
+
+    // console.log('Hello UserAuthenticationProvider Provider');
+    // console.log(this.user);
 
 
-    this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
-      .set('authorization', 'Bearer ' + token['pa']);
-    console.log(this.returnedData)
 
-    this.http.post<any>(this.url + `users`, this.user, { headers: this.returnedData })
-      .subscribe(result => { console.log("POST"); console.log(result) });
+    // this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+    //   .set('authorization', 'Bearer ' + token['pa']);
+    // console.log(this.returnedData)
+
+    // this.http.post<any>(this.url + `users`, this.user, { headers: this.returnedData })
+    //   .subscribe(result => { console.log("POST"); console.log(result) });
   }
 
 }

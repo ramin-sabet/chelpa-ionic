@@ -1,4 +1,3 @@
-
 <ion-header>
 
   <ion-navbar>
@@ -12,6 +11,11 @@
   <p>Please provide your name</p>
   <ion-input type="text" [(ngModel)]="profileName"></ion-input>
   <div padding>
-      <button ion-button color="primary" block (click)="gotoHomePage()">NEXT</button>
-    </div>
+    <button ion-button color="primary" block (click)="gotoHomePage()">NEXT</button>
+  </div>
+  <ion-fab right bottom>
+    <button ion-fab (click)="presentActionSheet()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
