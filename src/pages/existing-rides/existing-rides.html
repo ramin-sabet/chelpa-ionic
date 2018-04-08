@@ -17,12 +17,13 @@
     <div *ngIf="rides">
       <ion-item-sliding *ngFor="let ride of rides ;let i = index;" #item>
         <ion-item>
-          <ion-thumbnail item-start>
+          <!-- <ion-thumbnail item-start>
             <img src="assets/imgs/logo.png">
-          </ion-thumbnail>
+          </ion-thumbnail> -->
           <h2>{{ride.From}}</h2>
           <p>{{ride.To}}</p>
           <button ion-button clear item-end (click)="showDetails(ride)">View</button>
+          <button ion-button clear item-end (click)="joinRide(ride)">Join the Ride</button>
         </ion-item>
 
         <!-- <ion-item-options>

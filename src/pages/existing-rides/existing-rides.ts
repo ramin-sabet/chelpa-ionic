@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular';
 import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
-
+import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 
 @IonicPage()
 @Component({
@@ -18,15 +18,20 @@ export class ExistingRidesPage {
   userInfo: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider) {
+    public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
+    private joinTheRide: EventsDetailsProvider) {
     this.objectId = this.navParams.get('param1');
     this.rides = this.navParams.get('param2');
   }
 
 
-  more(item) {
-    console.log(item);
-    console.log(this.rides);
+  joinRide(ride) {
+
+    let joinedPerson = { "userId": ride.creatorId, "rideId": ride.rideId };
+
+    this.joinTheRide.joinRide(this.objectId, joinedPerson);
+    console.log("Join the Ride");
+    console.log(ride);
   }
 
   delete(item) {

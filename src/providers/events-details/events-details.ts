@@ -12,6 +12,16 @@ export class EventsDetailsProvider {
 
   constructor(public http: HttpClient, private storage: Storage) { }
 
+  joinRide (eventId, joinedPerson) {
+
+    this.storage.get('firebaseToken').then((val) => {
+      this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('authorization', 'Bearer ' + val);
+    })
+
+    this.http.put(this.url + `events/rides/${eventId}`, joinedPerson, { headers: this.returnedData }).subscribe(data => console.log(data));
+  }
+
   getDetails(eventId: string): Observable<any> {
 
     this.storage.get('firebaseToken').then((val) => {

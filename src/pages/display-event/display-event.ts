@@ -38,7 +38,7 @@ export class DisplayEventPage {
         this.rides = data.data.rides;
         console.log(this.rides);
         for (var i = 0; i < this.rides.length; i++) {
-          this.arrayRides.push({ 'From': this.rides[i].from, 'To': this.rides[i].to, 'creatorId': this.rides[i].creatorId })
+          this.arrayRides.push({ 'From': this.rides[i].from, 'To': this.rides[i].to, 'creatorId': this.rides[i].creatorId, 'rideId' :this.rides[i]._id })
         }
       }));
     await this.navCtrl.push('ExistingRidesPage', {
