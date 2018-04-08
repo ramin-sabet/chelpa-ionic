@@ -61,7 +61,7 @@ export class AddNewEventPage {
       }
     }
     let event = {
-      "creatorId": "1",
+      "creatorId": this.creatorId,
       "name": value.name,
       "time": value.time,
       "price": value.costs,

@@ -51,22 +51,22 @@ export class ProfileInfoPage {
   }
 
   takePicture(sourceType) {
-    var options= {
+    var options = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true
     }
-    this.camera.getPicture(options).then(imagePath =>{
-      let modal = this.modalCtrl.create('UploadModalPage', {data: imagePath});
+    this.camera.getPicture(options).then(imagePath => {
+      let modal = this.modalCtrl.create('UploadModalPage', { data: imagePath });
       modal.present();
-      modal.onDidDismiss(data =>{
-        if (data && data.reload){
-          
+      modal.onDidDismiss(data => {
+        if (data && data.reload) {
+
         }
       });
-    },err =>{
+    }, err => {
       console.log('Error: ', err);
     })
   }
@@ -84,7 +84,7 @@ export class ProfileInfoPage {
 
     this.storage.remove('firebaseToken');
     this.storage.set('firebaseToken', token['pa']);
-    //  this.userAuth.registerUser(token, this.profileName);
+    this.userAuth.registerUser(token, this.profileName);
 
     this.navCtrl.setRoot('ChelpaHomePage');
     this.storage.set('userName', this.profileName);

@@ -22,6 +22,7 @@ import { EventEngineProvider } from '../providers/event-engine/event-engine';
 import { EventSearchProvider } from '../providers/event-search/event-search';
 import { EventsDetailsProvider } from '../providers/events-details/events-details';
 import { ReviewPageModule } from '../pages/review/review.module';
+import { UserProfilePageModule } from '../pages/user-profile/user-profile.module';
 import { AvailableRidesProvider } from '../providers/available-rides/available-rides';
 import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
 import { Camera } from '@ionic-native/camera';
@@ -54,7 +55,8 @@ const firebaseConfig: FirebaseAppConfig = {
     AddNewEventPageModule,
     HttpClientModule,
     ReviewPageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    UserProfilePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

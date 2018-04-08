@@ -14,37 +14,38 @@
 
   <ion-list>
     <ion-list-header>Travelling from the event</ion-list-header>
-    <ion-item-sliding *ngFor="let ride of rides;let i = index;" #item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/logo.png">
-        </ion-thumbnail>
-        <h2>{{ride.From}}</h2>
-        <p>{{ride.To}}</p>
-        <button ion-button clear item-end (click)="showDetails(i)">View</button>
-      </ion-item>
+    <div *ngIf="rides">
+      <ion-item-sliding *ngFor="let ride of rides ;let i = index;" #item>
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/logo.png">
+          </ion-thumbnail>
+          <h2>{{ride.From}}</h2>
+          <p>{{ride.To}}</p>
+          <button ion-button clear item-end (click)="showDetails(ride)">View</button>
+        </ion-item>
 
-      <ion-item-options>
-        <button ion-button color="secondary" (click)="more(item)">
-          <ion-icon name="menu"></ion-icon>
-          Join the Ride
-        </button>
-        <button ion-button color="danger" (click)="delete(item)">
-          <ion-icon name="trash"></ion-icon>
-          Delete
-        </button>
-      </ion-item-options>
-
-      <ion-item-options side="left" (ionSwipe)="archive(item)">
+        <!-- <ion-item-options>
+          <button ion-button color="secondary" (click)="more(item)">
+            <ion-icon name="menu"></ion-icon>
+            View Profile
+          </button>
+          <button ion-button color="danger" (click)="delete(item)">
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options> -->
+     
+        <!-- <ion-item-options side="left" (ionSwipe)="archive(item)">
         <button ion-button color="primary" expandable (click)="archive(item)">
           <ion-icon name="archive" class="expand-hide"></ion-icon>
           <div class="expand-hide">View the Profile</div>
           <ion-spinner id="archive-spinner"></ion-spinner>
         </button>
-      </ion-item-options>
+      </ion-item-options> -->
 
-    </ion-item-sliding>
-
+      </ion-item-sliding>
+    </div>
     <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>

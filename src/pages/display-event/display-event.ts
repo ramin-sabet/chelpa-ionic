@@ -30,18 +30,18 @@ export class DisplayEventPage {
     });
   }
 
-  existingRides() {
-    
+  async existingRides() {
+
     this.availableRides.getAsyncData(this.eventObject.data._id)
       .subscribe((data => {
-        
+
         this.rides = data.data.rides;
         console.log(this.rides);
         for (var i = 0; i < this.rides.length; i++) {
-          this.arrayRides.push({ 'From': this.rides[i].from, 'To': this.rides[i].to })
+          this.arrayRides.push({ 'From': this.rides[i].from, 'To': this.rides[i].to, 'creatorId': this.rides[i].creatorId })
         }
       }));
-    this.navCtrl.push('ExistingRidesPage', {
+    await this.navCtrl.push('ExistingRidesPage', {
       param1: this.eventObject.data._id,
       param2: this.arrayRides
     });

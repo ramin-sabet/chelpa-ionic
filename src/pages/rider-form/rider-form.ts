@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AutoCompleteLocationProvider } from '../../providers/auto-complete-location/auto-complete-location';
 import { FieldOptionsProvider } from '../../providers/field-options/field-options';
 import { RideEngineProvider } from '../../providers/ride-engine/ride-engine';
+import { Storage } from '@ionic/storage';
 
 
 @IonicPage()
@@ -17,10 +18,11 @@ export class RiderFormPage {
   items: FormArray;
   properties: any = [];
   eventObject;
+  creatorId;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public autoComplete: AutoCompleteLocationProvider, public fieldOption: FieldOptionsProvider,
-    public riderEngine: RideEngineProvider) {
+    public riderEngine: RideEngineProvider, private storage: Storage) {
     this.rideDetails = this.formBuilder.group({
       From: ['', Validators.required],
       To: ['', Validators.required],
@@ -31,6 +33,9 @@ export class RiderFormPage {
     });
     this.eventObject = navParams.get('param1');
     console.log(this.eventObject.data._id);
+    this.storage.get('userId').then((val) => {
+      this.creatorId = val;
+    });
   }
 
   ionViewDidLoad() {
@@ -53,7 +58,7 @@ export class RiderFormPage {
     //   }
     // }
     let ride = {
-      "creatorId": "1",
+      "creatorId": this.creatorId,
       "From": value.From,
       "To": value.To,
       "time": value.time,

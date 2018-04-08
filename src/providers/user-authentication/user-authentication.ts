@@ -7,13 +7,23 @@ import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
 @Injectable()
 export class UserAuthenticationProvider {
 
-  url = 'http://localhost:3000/api/v1/users';
+  url = 'http://localhost:3000/api/v1/';
   returnedData;
   user: any = {};
 
   constructor(private http: HttpClient, private storage: Storage,
               private transfer:FileTransfer) {
 
+  }
+
+  getDetails(userId: string) {
+
+    this.storage.get('firebaseToken').then((val) => {
+      this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('authorization', 'Bearer ' + val);
+    });
+
+    return this.http.get<any>(this.url + `users/${userId}`, { headers: this.returnedData })
   }
 
   uploadImage(img, desc): any {
@@ -46,9 +56,9 @@ export class UserAuthenticationProvider {
     // return FileTransfer.upload(img, this.url, options);
    
    
-    // this.user.userId = token['uid'];
-    // this.user.userName = profileName;
-    // this.user.phoneNumber = token['phoneNumber'];
+    this.user.userId = token['uid'];
+    this.user.userName = profileName;
+    this.user.phoneNumber = token['phoneNumber'];
 
     // console.log('Hello UserAuthenticationProvider Provider');
     // console.log(this.user);
@@ -59,8 +69,8 @@ export class UserAuthenticationProvider {
     //   .set('authorization', 'Bearer ' + token['pa']);
     // console.log(this.returnedData)
 
-    // this.http.post<any>(this.url + `users`, this.user, { headers: this.returnedData })
-    //   .subscribe(result => { console.log("POST"); console.log(result) });
+    this.http.post<any>(this.url + `users`, this.user, { headers: this.returnedData })
+      .subscribe(result => { console.log("POST"); console.log(result) });
   }
 
 }

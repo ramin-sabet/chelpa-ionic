@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular';
+import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
 
 
 @IonicPage()
@@ -10,22 +11,22 @@ import { Platform, ActionSheetController } from 'ionic-angular';
 })
 export class ExistingRidesPage {
 
+  user: any;
+
   rides;
   objectId;
+  userInfo: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
-    public actionsheetCtrl: ActionSheetController) {
-    this.objectId = navParams.get('param1');
-    this.rides = navParams.get('param2');
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ExistingRidesPage');
+    public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider) {
+    this.objectId = this.navParams.get('param1');
+    this.rides = this.navParams.get('param2');
   }
 
 
   more(item) {
-
+    console.log(item);
+    console.log(this.rides);
   }
 
   delete(item) {
@@ -33,10 +34,6 @@ export class ExistingRidesPage {
   }
 
   mute(item) {
-
-  }
-
-  archive(item) {
 
   }
 
@@ -83,7 +80,16 @@ export class ExistingRidesPage {
     actionSheet.present();
   }
 
-  showDetails(i) {
-    console.log(i);
+  async showDetails(user) {
+
+    await this.userDetails.getDetails(user.creatorId)
+      .subscribe((data => {
+        console.log("JKL");
+        console.log(data.data);
+        this.user = ({ "createdAt": data.data.createdAt, "phoneNumber": data.data.phoneNumber, "userName": data.data.userName })
+        this.navCtrl.push('UserProfilePage', {
+          param1: this.user
+        });
+      }));
   }
 }
