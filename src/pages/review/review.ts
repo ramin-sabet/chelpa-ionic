@@ -20,9 +20,6 @@ export class ReviewPage {
     public actionsheetCtrl: ActionSheetController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReviewPage');
-  }
   openMenu() {
     let actionSheet = this.actionsheetCtrl.create({
       title: 'Reviews',

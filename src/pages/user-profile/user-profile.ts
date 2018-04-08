@@ -18,12 +18,8 @@ export class UserProfilePage {
   userInfo;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
     this.userInfo = this.navParams.get('param1');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserProfilePage');
-  }
 
 }

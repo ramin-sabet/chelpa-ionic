@@ -16,10 +16,11 @@ export class AutoCompleteLocationProvider implements AutoCompleteService {
   }
 
   getResults(keyword: string) {
-    return this.http.get(this.url + `json?input=${keyword}&key=${this.apiKey}`)
+    return this.http.get(this.url + `json?input=${keyword}&location=43.653226, -79.383184&radius=5000000&key=${this.apiKey}`)
       .map(
         result => {
           return result['predictions'];
         })
   }
 }
+

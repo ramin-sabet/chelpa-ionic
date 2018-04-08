@@ -32,7 +32,7 @@ export class RiderFormPage {
       items: this.formBuilder.array([this.createItem()])
     });
     this.eventObject = navParams.get('param1');
-    console.log(this.eventObject.data._id);
+    // console.log(this.eventObject.data._id);
     this.storage.get('userId').then((val) => {
       this.creatorId = val;
     });
