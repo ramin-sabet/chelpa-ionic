@@ -5,6 +5,7 @@ import { AutoCompleteLocationProvider } from '../../providers/auto-complete-loca
 import { FieldOptionsProvider } from '../../providers/field-options/field-options';
 import { RideEngineProvider } from '../../providers/ride-engine/ride-engine';
 import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -22,7 +23,8 @@ export class RiderFormPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public autoComplete: AutoCompleteLocationProvider, public fieldOption: FieldOptionsProvider,
-    public riderEngine: RideEngineProvider, private storage: Storage) {
+    public riderEngine: RideEngineProvider, private storage: Storage,
+    private alertCtrl: AlertController) {
     this.rideDetails = this.formBuilder.group({
       From: ['', Validators.required],
       To: ['', Validators.required],
@@ -66,7 +68,32 @@ export class RiderFormPage {
       "costs": value.costs,
       "properties": this.properties
     };
-    this.riderEngine.submitRide(this.eventObject.data._id, ride);
+    console.log(this.eventObject);
+    let confirm = this.alertCtrl.create({
+      title: `Creating a ride for ${this.eventObject.data.name}`,
+      message: `Your ride will be from ${value.From} to ${value.To} at ${value.time}`,
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            let alert = this.alertCtrl.create({
+              title: 'Cancelled!',
+              subTitle: 'You have cancelled your request to add a ride!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+        },
+        {
+          text: 'Create',
+          handler: () => {
+            this.riderEngine.submitRide(this.eventObject.data._id, ride);
+            this.navCtrl.push('ChelpaHomePage');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   createItem(): FormGroup {

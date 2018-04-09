@@ -5,6 +5,8 @@ import { FieldOptionsProvider } from '../../providers/field-options/field-option
 import { AutoCompleteLocationProvider } from '../../providers/auto-complete-location/auto-complete-location';
 import { EventEngineProvider } from '../../providers/event-engine/event-engine';
 import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -24,8 +26,8 @@ export class AddNewEventPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public formBuilder: FormBuilder, public fieldOption: FieldOptionsProvider,
-    public autoComplete: AutoCompleteLocationProvider,
-    public eventEngine: EventEngineProvider, private storage: Storage) {
+    public autoComplete: AutoCompleteLocationProvider, public eventEngine: EventEngineProvider,
+    private storage: Storage, private alertCtrl: AlertController) {
     this.newEvent = this.formBuilder.group({
       name: ['', Validators.required],
       location: ['', Validators.required],
@@ -47,7 +49,7 @@ export class AddNewEventPage {
 
 
   submitForm(value: any) {
-    this.properties=[];
+    this.properties = [];
     if (value.items.length == 0) {
       this.properties = [];
     }
@@ -69,7 +71,31 @@ export class AddNewEventPage {
       "capacity": value.guestNumbers,
       "properties": this.properties
     };
-    this.eventEngine.submitEvent(event);
+    let confirm = this.alertCtrl.create({
+      title: `${value.name}`,
+      message: `You event location is ${value.location} at ${value.time}?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            let alert = this.alertCtrl.create({
+              title: 'Cancelled!',
+              subTitle: 'You have cancelled your request to add a new event!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+        },
+        {
+          text: 'Submit',
+          handler: () => {
+            this.eventEngine.submitEvent(event);
+            this.navCtrl.push('ChelpaHomePage');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   createItem(): FormGroup {

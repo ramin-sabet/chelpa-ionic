@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular';
 import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
 import { EventsDetailsProvider } from '../../providers/events-details/events-details';
+import { AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class ExistingRidesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
-    private joinTheRide: EventsDetailsProvider) {
+    private joinTheRide: EventsDetailsProvider, private alertCtrl: AlertController) {
     this.objectId = this.navParams.get('param1');
     this.rides = this.navParams.get('param2');
   }
@@ -29,10 +30,38 @@ export class ExistingRidesPage {
 
     let joinedPerson = { "userId": ride.creatorId, "rideId": ride.rideId };
 
-    this.joinTheRide.joinRide(this.objectId, joinedPerson);
-    console.log("Join the Ride");
-    console.log(ride);
+
+
+    let confirm = this.alertCtrl.create({
+      title: 'Joining the Ride?',
+      message: 'As you joining this ride your phone number with be available to the creator of the ride?',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            let alert = this.alertCtrl.create({
+              title: 'Cancelled!',
+              subTitle: 'You have cancelled your request to join the ride!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this.joinTheRide.joinRide(this.objectId, joinedPerson);
+            this.navCtrl.push('ChelpaHomePage');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
+
+
+
+
 
   delete(item) {
 
