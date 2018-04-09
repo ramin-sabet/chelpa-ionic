@@ -1,15 +1,68 @@
 <ion-header>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-title>
+    Ionic Blank
+  </ion-title>
 </ion-header>
 
 <ion-content padding>
   <ion-auto-complete full [dataProvider]="eventSearch" placeholder="eventSearch" (itemSelected)="getEvent($event)"></ion-auto-complete>
 
-  <section *ngIf="afAuth.authState | async; let user; else phForm">Welcome</section>
- 
-    
+  <section *ngIf="afAuth.authState | async; let user; else phForm">Welcome
+    <form [formGroup]="rideDetails" (ngSubmit)="submitForm(rideDetails.value)">
+      <ion-list>
+        <ion-auto-complete formControlName="from" [dataProvider]="autoComplete" [options]="{ placeholder : 'from' }"></ion-auto-complete>
+        <ion-item *ngIf="rideDetails.controls['from'].hasError('required') && rideDetails.controls['from'].touched">
+          <p> *This field is required</p>
+        </ion-item>
+
+        <ion-auto-complete formControlName="to" [dataProvider]="autoComplete" [options]="{ placeholder : 'to' }"></ion-auto-complete>
+
+        <ion-item *ngIf="rideDetails.controls['to'].hasError('required') && rideDetails.controls['to'].touched">
+          <p> *This field is required</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            Time
+          </ion-label>
+          <ion-datetime formControlName="time" displayFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+        </ion-item>
+
+        <!-- <ion-item> -->
+        <ion-item>
+          <ion-label>Preferred way of transportation</ion-label>
+          <ion-select [(ngModel)]="transportationOption" formControlName="transportationOption" (ionChange)="toggle(transportationOption)">
+            <ion-option value="drive">I drive</ion-option>
+            <ion-option value="taxi">Taxi/Uber/Lyft</ion-option>
+            <ion-option value="publicTransportation">Public Transportation</ion-option>
+            <ion-option value="genesis">Walk</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div *ngIf= toggleOption>
+          <ion-item>
+            <ion-label>
+              Price to offer
+            </ion-label>
+            <ion-input type="number" formControlName="price"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Guest Numbers
+            </ion-label>
+            <ion-input type="number" formControlName="guestNumbers"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="rideDetails.controls['guestNumbers'].hasError('required') && rideDetails.controls['guestNumbers'].touched && rideDetails.controls['guestNumbers'] == '0'">
+            <p> *Guest Numbers can not be zero</p>
+          </ion-item>
+        </div>
+
+        <button clear ion-button [disabled]="!rideDetails.valid">Submit</button>
+      </ion-list>
+    </form>
+  </section>
+
+
 
   <ng-template #phForm>
     <form #phoneForm="ngForm" (ngSubmit)="sendCode(phoneForm)">

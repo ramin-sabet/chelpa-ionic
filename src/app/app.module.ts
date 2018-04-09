@@ -27,6 +27,7 @@ import { AvailableRidesProvider } from '../providers/available-rides/available-r
 import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { TripProvider } from '../providers/trip/trip';
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -76,7 +77,10 @@ const firebaseConfig: FirebaseAppConfig = {
     AvailableRidesProvider,
     RideEngineProvider,
     Camera,
-    FileTransfer
+    FileTransfer,
+    TripProvider,
+    TripProvider,
+    TripProvider
   ]
 })
 export class AppModule { }
