@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
+import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the UserProfilePage page.
  *
@@ -16,9 +18,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class UserProfilePage {
 
   userInfo;
+  creatorId;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userInfo = this.navParams.get('param1');
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private userProfile: UserAuthenticationProvider, private storage: Storage) {
+    this.storage.get('userId').then((val) => {
+      this.creatorId = val;
+    });
+    this.userInfo = userProfile.getDetails(this.creatorId)
+      .subscribe(data => console.log(data));
   }
 
 

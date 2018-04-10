@@ -7,30 +7,32 @@
 </ion-header>
 
 <ion-content parallax>
-  <div class="bg">
-  </div>
+  <div *ngIf="data">
+    <div class="bg">
+    </div>
 
-  <div class="main-cnt">
-    <img src="assets/imgs/logo.png" class="dp">
-    <h1 text-center>{{userInfo.createdAt}}</h1>
-    <ion-list no-lines>
-      <ion-item>
-        <ion-icon name="contacts" item-start></ion-icon>
-        {{userInfo.phoneNumber}}
-        <ion-icon name="arrow-dropright" item-end></ion-icon>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="logo-facebook" item-start></ion-icon>
-        {{userInfo.userName}}
-        <p>www.facebook.com/{{userInfo.userName}}</p>
-        <ion-icon name="arrow-dropright" item-end></ion-icon>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="logo-instagram" item-start></ion-icon>
-        Ratings
-        <p>Stars format</p>
-        <ion-icon name="arrow-dropright" item-end></ion-icon>
-      </ion-item>
-    </ion-list>
+    <div class="main-cnt">
+      <img src="assets/imgs/logo.png" class="dp">
+      <h1 text-center>{{userInfo.createdAt}}</h1>
+      <ion-list no-lines>
+        <ion-item>
+          <ion-icon name="contacts" item-start></ion-icon>
+          {{userInfo.phoneNumber}}
+          <ion-icon name="arrow-dropright" item-end></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="logo-facebook" item-start></ion-icon>
+          {{userInfo.userName}}
+          <p>www.facebook.com/{{userInfo.userName}}</p>
+          <ion-icon name="arrow-dropright" item-end></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="logo-instagram" item-start></ion-icon>
+          Ratings
+          <p>Stars format</p>
+          <ion-icon name="arrow-dropright" item-end></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 </ion-content>
