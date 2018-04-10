@@ -19,7 +19,7 @@ export class RiderFormPage {
   items: FormArray;
   properties: any = [];
   eventObject;
-  creatorId;
+  creatorId: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder,
     public autoComplete: AutoCompleteLocationProvider, public fieldOption: FieldOptionsProvider,

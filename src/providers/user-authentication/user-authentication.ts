@@ -12,8 +12,19 @@ export class UserAuthenticationProvider {
   user: any = {};
 
   constructor(private http: HttpClient, private storage: Storage,
-              private transfer:FileTransfer) {
+    private transfer: FileTransfer) {
 
+  }
+
+  updateUser(userId, updatedDetails) {
+
+    this.storage.get('firebaseToken').then((val) => {
+      this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('authorization', 'Bearer ' + val);
+    });
+
+    this.http.put<any>(this.url + `users/` + userId, updatedDetails, { headers: this.returnedData })
+      .subscribe(result => { console.log("Put"); console.log(result) });
   }
 
   getDetails(userId: string) {
@@ -27,13 +38,13 @@ export class UserAuthenticationProvider {
   }
 
   uploadImage(img, desc): any {
- 
+
     // // Destination URL
     // let url = this.apiURL + 'images';
- 
+
     // // File for Upload
     var targetPath = img;
- 
+
     var options: FileUploadOptions = {
       fileKey: 'image',
       chunkedMode: false,
@@ -43,7 +54,7 @@ export class UserAuthenticationProvider {
   }
 
   registerUser(token, profileName) {
-    
+
     // var options: FileUploadOptions = {
     //   fileKey: 'image',
     //   chunkedMode: false,
@@ -54,8 +65,8 @@ export class UserAuthenticationProvider {
     const FileTransfer = this.transfer.create();
 
     // return FileTransfer.upload(img, this.url, options);
-   
-   
+
+
     this.user.userId = token['uid'];
     this.user.userName = profileName;
     this.user.phoneNumber = token['phoneNumber'];

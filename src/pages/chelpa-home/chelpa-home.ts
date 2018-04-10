@@ -8,6 +8,7 @@ import { EventSearchProvider } from '../../providers/event-search/event-search';
 import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { TripProvider } from '../../providers/trip/trip';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { AlertController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -32,7 +33,8 @@ export class ChelpaHomePage {
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
     navParams: NavParams, private storage: Storage, private formBuilder: FormBuilder,
     public eventSearch: EventSearchProvider, private eventsDetails: EventsDetailsProvider,
-    public autoComplete: AutoCompleteLocationProvider, private tripProvider: TripProvider) {
+    public autoComplete: AutoCompleteLocationProvider, private tripProvider: TripProvider,
+    private alertCtrl: AlertController) {
     this.storage.get('userId').then((val) => {
       this.creatorId = val;
     });
@@ -60,7 +62,38 @@ export class ChelpaHomePage {
       "creatorId": this.creatorId, "from": value.from, "to": value.to, "time": value.time,
       "transportationOption": value.transportationOption, "price": value.price, "guestNumbers": value.guestNumbers
     }
-    this.tripProvider.submitTrip(this.tripObject);
+    let confirm = this.alertCtrl.create({
+      title: `You are about to submit the following ride!`,
+      message: `The ride from ${value.from} to ${value.to} at ${value.time}?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            let alert = this.alertCtrl.create({
+              title: 'Cancelled!',
+              subTitle: 'You have cancelled your request to add a new trip!',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+        },
+        {
+          text: 'Submit',
+          handler: () => {
+            this.tripProvider.submitTrip(this.tripObject);
+            let alert = this.alertCtrl.create({
+              title: 'Submitted!',
+              subTitle: 'You may now proceed to be connected with people with same destination!',
+              buttons: ['OK']
+            });
+            alert.present();
+            this.navCtrl.push('ExistingRidesPage');
+          }
+        }
+      ]
+    });
+    confirm.present();
+
   }
 
   ionViewDidLoad() {
@@ -75,9 +108,13 @@ export class ChelpaHomePage {
     });
   }
 
-  addNewEvent() {
-    this.navCtrl.push('AddNewEventPage');
+  editProfile(){
+    this.navCtrl.push('EditProfilePage');
   }
+
+  // addNewEvent() {
+  //   this.navCtrl.push('AddNewEventPage');
+  // }
 
   sendCode(form) {
 
