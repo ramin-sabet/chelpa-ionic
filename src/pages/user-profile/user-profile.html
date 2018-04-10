@@ -7,28 +7,28 @@
 </ion-header>
 
 <ion-content parallax>
-  <div *ngIf="data">
-    <div class="bg">
-    </div>
 
+  <div class="bg">
+  </div>
+  <div *ngIf="userInfo">
     <div class="main-cnt">
       <img src="assets/imgs/logo.png" class="dp">
-      <h1 text-center>{{userInfo.createdAt}}</h1>
+      <h1 text-center>{{userInfo.userName}}</h1>
       <ion-list no-lines>
         <ion-item>
           <ion-icon name="contacts" item-start></ion-icon>
-          {{userInfo.phoneNumber}}
+          {{userInfo.gender }}
           <ion-icon name="arrow-dropright" item-end></ion-icon>
         </ion-item>
         <ion-item>
           <ion-icon name="logo-facebook" item-start></ion-icon>
-          {{userInfo.userName}}
-          <p>www.facebook.com/{{userInfo.userName}}</p>
+          {{userInfo.work}}
+          <p>{{userInfo.workField}}</p>
           <ion-icon name="arrow-dropright" item-end></ion-icon>
         </ion-item>
         <ion-item>
           <ion-icon name="logo-instagram" item-start></ion-icon>
-          Ratings
+
           <p>Stars format</p>
           <ion-icon name="arrow-dropright" item-end></ion-icon>
         </ion-item>
@@ -36,3 +36,6 @@
     </div>
   </div>
 </ion-content>
+<ion-footer>
+  <button ion-button full type="submit" (click)="messageToJoin()">Message to join the ride</button>
+</ion-footer>

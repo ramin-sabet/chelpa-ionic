@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class AvailableRidesProvider {
 
-  url = 'http://localhost:3000/api/v1/events/';
+  url = 'http://localhost:3000/api/v1/';
   returnedData;
   constructor(public http: HttpClient, private storage: Storage) {
     console.log('Hello AvailableRidesProvider Provider');
@@ -16,7 +16,7 @@ export class AvailableRidesProvider {
       this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
         .set('authorization', 'Bearer ' + val);
     });
-    return this.http.get<any>(this.url + `rides/${eventId}`, { headers: this.returnedData });
+    return this.http.get<any>(this.url + `trips`, { headers: this.returnedData });
 
   }
 }

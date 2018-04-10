@@ -1,9 +1,5 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>existing-rides</ion-title>
-  </ion-navbar>
-
+  <ion-title>existing-rides</ion-title>
 </ion-header>
 
 
@@ -14,8 +10,8 @@
 
   <ion-list>
     <ion-list-header>Travelling from the event</ion-list-header>
-    <div *ngIf="rides">
-      <ion-item-sliding *ngFor="let ride of rides ;let i = index;" #item>
+    <div *ngIf="arrayRides">
+      <ion-item-sliding *ngFor="let ride of arrayRides ;let i = index;" #item>
         <ion-item>
           <!-- <ion-thumbnail item-start>
             <img src="assets/imgs/logo.png">
@@ -36,7 +32,7 @@
             Delete
           </button>
         </ion-item-options> -->
-     
+
         <!-- <ion-item-options side="left" (ionSwipe)="archive(item)">
         <button ion-button color="primary" expandable (click)="archive(item)">
           <ion-icon name="archive" class="expand-hide"></ion-icon>
@@ -51,8 +47,8 @@
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll> -->
-
-
   </ion-list>
-
 </ion-content>
+<ion-footer>
+  <button ion-button full type="submit" (click)="goToHomePage()">Go Back to Home Page</button>
+</ion-footer>

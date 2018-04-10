@@ -4,6 +4,8 @@ import { Platform, ActionSheetController } from 'ionic-angular';
 import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
 import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { AlertController } from 'ionic-angular';
+import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -17,12 +19,31 @@ export class ExistingRidesPage {
   rides;
   objectId;
   userInfo: any[] = [];
+  creatorId: string;
+  arrayRides: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
-    private joinTheRide: EventsDetailsProvider, private alertCtrl: AlertController) {
-    this.objectId = this.navParams.get('param1');
-    this.rides = this.navParams.get('param2');
+    private joinTheRide: EventsDetailsProvider, private alertCtrl: AlertController,
+    private availableRides: AvailableRidesProvider, private storage: Storage) {
+    this.storage.get('userId').then((val) => {
+      this.creatorId = val;
+    });
+    this.availableRides.getAsyncData(this.creatorId)
+      .subscribe(data => {
+        for (var i = 0; i < data.data.length; i++) {
+          this.arrayRides.push({ 'From': data.data[i].from, 'To': data.data[i].to, 'creatorId': data.data[i].creatorId, 'rideId': data.data[i]._id })
+        }
+      });
+
+  }
+
+  ionViewDidLoad() {
+
+  }
+
+  goToHomePage() {
+    this.navCtrl.push('ChelpaHomePage');
   }
 
 

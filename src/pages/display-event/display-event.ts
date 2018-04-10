@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
 
 
 
@@ -16,8 +15,7 @@ export class DisplayEventPage {
   rides: any[];
   arrayRides: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public availableRides: AvailableRidesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.eventObject = navParams.get('result');
   }
 

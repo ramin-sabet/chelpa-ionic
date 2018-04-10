@@ -23,7 +23,7 @@ export class UserAuthenticationProvider {
         .set('authorization', 'Bearer ' + val);
     });
 
-    this.http.put<any>(this.url + `users/$userId`, updatedDetails, { headers: this.returnedData })
+    this.http.put<any>(this.url + `users/${userId}`, updatedDetails, { headers: this.returnedData })
       .subscribe(result => { console.log("Put"); console.log(result) });
   }
 
@@ -34,7 +34,7 @@ export class UserAuthenticationProvider {
         .set('authorization', 'Bearer ' + val);
     });
 
-    return this.http.get<any>(this.url + `users/${userId}`, { headers: this.returnedData })
+    return this.http.get<any>(this.url + `users/B4XiSFZUc8MK9Mk8BhnuuzwLcgy1`, { headers: this.returnedData })
   }
 
   uploadImage(img, desc): any {
