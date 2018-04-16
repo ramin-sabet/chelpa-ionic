@@ -18,21 +18,25 @@ export class ExistingRidesPage {
 
   rides;
   objectId;
+  tripId: string = '';
   userInfo: any[] = [];
   creatorId: string;
   arrayRides: any[] = [];
+  dataReturned: Boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
     private joinTheRide: EventsDetailsProvider, private alertCtrl: AlertController,
     private availableRides: AvailableRidesProvider, private storage: Storage) {
-    this.storage.get('userId').then((val) => {
-      this.creatorId = val;
-    });
-    this.availableRides.getAsyncData(this.creatorId)
+    this.tripId = navParams.get('param1');
+    this.availableRides.getAsyncData(this.tripId)
       .subscribe(data => {
-        for (var i = 0; i < data.data.length; i++) {
-          this.arrayRides.push({ 'From': data.data[i].from, 'To': data.data[i].to, 'creatorId': data.data[i].creatorId, 'rideId': data.data[i]._id })
+        if (data) {
+          for (var i = 0; i < data.modifiedData.length; i++) {
+            this.arrayRides.push({ 'From': data.modifiedData[i]['from'], 'To': data.modifiedData[i]['to'], 'creatorId': data.modifiedData[i]['creatorId'], 'rideId': data.modifiedData[i]['_id'] })
+          }
+        }else{
+          this.dataReturned = false;
         }
       });
 

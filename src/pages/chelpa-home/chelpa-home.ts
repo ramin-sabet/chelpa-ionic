@@ -28,6 +28,7 @@ export class ChelpaHomePage {
   toggleOption: boolean = false;
   tripObject = {};
   creatorId;
+  tripId: string = '';
 
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
@@ -79,15 +80,20 @@ export class ChelpaHomePage {
         },
         {
           text: 'Submit',
-          handler: () => {
+          handler: async () => {
             this.tripProvider.submitTrip(this.tripObject);
+            await this.storage.get('createdTrip').then((val) => {
+              this.tripId = val;
+            });
             let alert = this.alertCtrl.create({
               title: 'Submitted!',
               subTitle: 'You may now proceed to be connected with people with same destination!',
               buttons: ['OK']
             });
             alert.present();
-            this.navCtrl.push('ExistingRidesPage');
+            this.navCtrl.push('ExistingRidesPage', {
+              param1: this.tripId,
+            })
           }
         }
       ]
@@ -108,7 +114,7 @@ export class ChelpaHomePage {
     });
   }
 
-  editProfile(){
+  editProfile() {
     this.navCtrl.push('EditProfilePage');
   }
 

@@ -10,7 +10,7 @@
 
   <ion-list>
     <ion-list-header>Travelling from the event</ion-list-header>
-    <div *ngIf="arrayRides">
+    <div *ngIf="dataReturned">
       <ion-item-sliding *ngFor="let ride of arrayRides ;let i = index;" #item>
         <ion-item>
           <!-- <ion-thumbnail item-start>
@@ -19,7 +19,7 @@
           <h2>{{ride.From}}</h2>
           <p>{{ride.To}}</p>
           <button ion-button clear item-end (click)="showDetails(ride)">View</button>
-          <button ion-button clear item-end (click)="joinRide(ride)">Join</button>
+          <button ion-button clear item-end (click)="joinRide(ride)">Connect</button>
         </ion-item>
 
         <!-- <ion-item-options>

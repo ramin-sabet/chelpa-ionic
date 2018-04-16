@@ -21,6 +21,8 @@ export class TripProvider {
 
 
     console.log(param);
-    this.http.post(this.url, param, { headers: this.returnedData }).subscribe(data => console.log(data));
+    this.http.post(this.url, param, { headers: this.returnedData }).subscribe(data => {
+      this.storage.set('createdTrip', data['data']._id);
+    })
   }
 }
