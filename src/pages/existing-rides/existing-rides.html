@@ -13,40 +13,14 @@
     <div *ngIf="dataReturned">
       <ion-item-sliding *ngFor="let ride of arrayRides ;let i = index;" #item>
         <ion-item>
-          <!-- <ion-thumbnail item-start>
-            <img src="assets/imgs/logo.png">
-          </ion-thumbnail> -->
           <h2>{{ride.From}}</h2>
           <p>{{ride.To}}</p>
           <button ion-button clear item-end (click)="showDetails(ride)">View</button>
           <button ion-button clear item-end (click)="joinRide(ride)">Connect</button>
         </ion-item>
 
-        <!-- <ion-item-options>
-          <button ion-button color="secondary" (click)="more(item)">
-            <ion-icon name="menu"></ion-icon>
-            View Profile
-          </button>
-          <button ion-button color="danger" (click)="delete(item)">
-            <ion-icon name="trash"></ion-icon>
-            Delete
-          </button>
-        </ion-item-options> -->
-
-        <!-- <ion-item-options side="left" (ionSwipe)="archive(item)">
-        <button ion-button color="primary" expandable (click)="archive(item)">
-          <ion-icon name="archive" class="expand-hide"></ion-icon>
-          <div class="expand-hide">View the Profile</div>
-          <ion-spinner id="archive-spinner"></ion-spinner>
-        </button>
-      </ion-item-options> -->
-
       </ion-item-sliding>
     </div>
-    <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll> -->
   </ion-list>
 </ion-content>
 <ion-footer>

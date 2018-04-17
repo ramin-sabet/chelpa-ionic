@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
-
 import { MyApp } from './app.component';
 import { ChelpaHomePageModule } from '../pages/chelpa-home/chelpa-home.module';
 import { CodePageModule } from '../pages/code/code.module';
@@ -78,8 +77,6 @@ const firebaseConfig: FirebaseAppConfig = {
     RideEngineProvider,
     Camera,
     FileTransfer,
-    TripProvider,
-    TripProvider,
     TripProvider
   ]
 })

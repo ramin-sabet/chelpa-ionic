@@ -16,12 +16,10 @@ export class AvailableRidesProvider {
   }
 
   getAsyncData(tripId) {
-
     this.storage.get('firebaseToken').then((val) => {
       this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
         .set('authorization', 'Bearer ' + val);
     });
-
     return this.http.get<any>(this.url + `trips/${tripId}/60/1/1`, { headers: this.returnedData });
 
   }

@@ -146,4 +146,10 @@ export class ChelpaHomePage {
         })
     }
   }
+
+  Chat(){
+    this.navCtrl.push('ChatPage', {
+      param1: this.profileName
+    })
+  }
 }

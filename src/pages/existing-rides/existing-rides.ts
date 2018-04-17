@@ -31,11 +31,11 @@ export class ExistingRidesPage {
     this.tripId = navParams.get('param1');
     this.availableRides.getAsyncData(this.tripId)
       .subscribe(data => {
-        if (data) {
+        if (data == null) {
           for (var i = 0; i < data.modifiedData.length; i++) {
             this.arrayRides.push({ 'From': data.modifiedData[i]['from'], 'To': data.modifiedData[i]['to'], 'creatorId': data.modifiedData[i]['creatorId'], 'rideId': data.modifiedData[i]['_id'] })
           }
-        }else{
+        } else {
           this.dataReturned = false;
         }
       });
@@ -101,42 +101,40 @@ export class ExistingRidesPage {
   }
 
   openMenu() {
-    let actionSheet = this.actionsheetCtrl.create({
-      title: 'SORTED BY',
-      cssClass: 'action-sheets-basic-page',
+
+    let prompt = this.alertCtrl.create({
+      title: 'Login',
+      message: "Enter a name for this new album you're so keen on adding",
+      inputs: [
+        {
+          name: 'timeLimit',
+          placeholder: 'Range of time in minutes'
+        },
+        {
+          name: 'originLimit',
+          placeholder: 'Range of search from the origin in miles'
+        },
+        {
+          name: 'destinationLimit',
+          placeholder: 'Range of search from the destination in miles'
+        },
+      ],
       buttons: [
         {
-          text: 'Price',
-          icon: !this.platform.is('ios') ? 'cash' : null,
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        },
-        {
-          text: 'Time',
-          icon: !this.platform.is('ios') ? 'clock' : null,
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        },
-        {
-          text: 'Rating',
-          icon: !this.platform.is('ios') ? 'star-half' : null,
-          handler: () => {
-            console.log('Delete clicked');
-          }
-        },
-        {
           text: 'Cancel',
-          role: 'cancel', // will always sort to be on the bottom
-          icon: !this.platform.is('ios') ? 'close' : null,
-          handler: () => {
+          handler: data => {
             console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Limit the results',
+          handler: data => {
+            console.log(data);
           }
         }
       ]
     });
-    actionSheet.present();
+    prompt.present();
   }
 
   async showDetails(user) {
