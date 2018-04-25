@@ -4,8 +4,8 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AutoCompleteLocationProvider } from '../../providers/auto-complete-location/auto-complete-location';
 import * as firebase from 'firebase';
-import { EventSearchProvider } from '../../providers/event-search/event-search';
-import { EventsDetailsProvider } from '../../providers/events-details/events-details';
+// import { EventSearchProvider } from '../../providers/event-search/event-search';
+// import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { TripProvider } from '../../providers/trip/trip';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AlertController } from 'ionic-angular';
@@ -33,7 +33,6 @@ export class ChelpaHomePage {
 
   constructor(public navCtrl: NavController, public afAuth: AngularFireAuth,
     navParams: NavParams, private storage: Storage, private formBuilder: FormBuilder,
-    public eventSearch: EventSearchProvider, private eventsDetails: EventsDetailsProvider,
     public autoComplete: AutoCompleteLocationProvider, private tripProvider: TripProvider,
     private alertCtrl: AlertController) {
     this.storage.get('userId').then((val) => {
@@ -127,14 +126,14 @@ export class ChelpaHomePage {
     })
   }
 
-  getEvent(event) {
-    if (event.propertyId == 0) {
-      this.navCtrl.push('AddNewEventPage');
-    } else {
-      this.eventsDetails.getDetails(event._id)
-        .subscribe((result) => {
-          this.navCtrl.push('DisplayEventPage', { result: result });
-        })
-    }
-  }
+  // getEvent(event) {
+  //   if (event.propertyId == 0) {
+  //     this.navCtrl.push('AddNewEventPage');
+  //   } else {
+  //     this.eventsDetails.getDetails(event._id)
+  //       .subscribe((result) => {
+  //         this.navCtrl.push('DisplayEventPage', { result: result });
+  //       })
+  //   }
+  // }
 }

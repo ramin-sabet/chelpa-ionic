@@ -8,29 +8,28 @@ import { MyApp } from './app.component';
 import { ChelpaHomePageModule } from '../pages/chelpa-home/chelpa-home.module';
 import { CodePageModule } from '../pages/code/code.module';
 import { ProfileInfoPageModule } from '../pages/profile-info/profile-info.module';
-import { AddNewEventPageModule } from '../pages/add-new-event/add-new-event.module';
+import { UserProfilePageModule } from '../pages/user-profile/user-profile.module';
 import { TermsAndConditionsPageModule } from '../pages/terms-and-conditions/terms-and-conditions.module';
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { UserAuthenticationProvider } from '../providers/user-authentication/user-authentication';
-import { FieldOptionsProvider } from '../providers/field-options/field-options';
+// import { FieldOptionsProvider } from '../providers/field-options/field-options';
 import { HttpClientModule } from '@angular/common/http';
 import { AutoCompleteLocationProvider } from '../providers/auto-complete-location/auto-complete-location';
-import { EventEngineProvider } from '../providers/event-engine/event-engine';
-import { EventSearchProvider } from '../providers/event-search/event-search';
-import { EventsDetailsProvider } from '../providers/events-details/events-details';
+// import { EventEngineProvider } from '../providers/event-engine/event-engine';
+// import { EventSearchProvider } from '../providers/event-search/event-search';
+// import { EventsDetailsProvider } from '../providers/events-details/events-details';
 import { ReviewPageModule } from '../pages/review/review.module';
-import { UserProfilePageModule } from '../pages/user-profile/user-profile.module';
 import { AvailableRidesProvider } from '../providers/available-rides/available-rides';
-import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
+// import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { TripProvider } from '../providers/trip/trip';
 import { ChatProvider } from '../providers/chat/chat';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -48,7 +47,7 @@ const firebaseConfig: FirebaseAppConfig = {
   ],
   imports: [
     BrowserModule,
-    SocketIoModule.forRoot(config),
+    // SocketIoModule.forRoot(config),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
@@ -56,12 +55,11 @@ const firebaseConfig: FirebaseAppConfig = {
     AngularFireAuthModule,
     ChelpaHomePageModule,
     CodePageModule,
+    UserProfilePageModule,
     ProfileInfoPageModule,
-    AddNewEventPageModule,
     HttpClientModule,
     ReviewPageModule,
-    AngularFireDatabaseModule,
-    UserProfilePageModule
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -73,13 +71,13 @@ const firebaseConfig: FirebaseAppConfig = {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserAuthenticationProvider,
-    FieldOptionsProvider,
+    // FieldOptionsProvider,
     AutoCompleteLocationProvider,
-    EventEngineProvider,
-    EventSearchProvider,
-    EventsDetailsProvider,
+    // EventEngineProvider,
+    // EventSearchProvider,
+    // EventsDetailsProvider,
     AvailableRidesProvider,
-    RideEngineProvider,
+    // RideEngineProvider,
     Camera,
     FileTransfer,
     TripProvider,

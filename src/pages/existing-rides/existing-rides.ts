@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular';
 import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
-import { EventsDetailsProvider } from '../../providers/events-details/events-details';
+// import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { AlertController } from 'ionic-angular';
 import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
 import { ChatProvider } from '../../providers/chat/chat';
@@ -29,9 +29,9 @@ export class ExistingRidesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
-    private joinTheRide: EventsDetailsProvider, private alertCtrl: AlertController,
+    private alertCtrl: AlertController,
     private availableRides: AvailableRidesProvider, private storage: Storage,
-    private socket: Socket, private chatPro: ChatProvider) {
+    private chatPro: ChatProvider) {
     this.storage.get('userName').then((val) => {
       this.userName = val;
     });
@@ -94,7 +94,7 @@ export class ExistingRidesPage {
   // }
 
   chat(ride) {
-    
+
     this.chatPro.createNewConversation(ride.creatorId);
     // this.socket.connect();
     // this.socket.emit('set-nickname', this.userName);

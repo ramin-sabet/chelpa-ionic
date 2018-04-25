@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { AngularFireDatabase } from 'angularfire2/database'
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { Storage } from '@ionic/storage';
-import { Socket } from 'ng-socket-io';
+// import { Socket } from 'ng-socket-io';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -22,7 +22,7 @@ export class ChatPage {
 
   constructor(public db: AngularFireDatabase,
     public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
-    private socket: Socket, private toastCtrl: ToastController) {
+     private toastCtrl: ToastController) {
     this.storage.get('userName').then((val) => {
       this.username = val;
     });
@@ -44,18 +44,18 @@ export class ChatPage {
   }
 
   getUsers() {
-    let observable = new Observable(observer => {
-      this.socket.on('users-changed', data => {
-        observer.next(data);
-      })
-    });
-    return observable;
+    // let observable = new Observable(observer => {
+    //   this.socket.on('users-changed', data => {
+    //     observer.next(data);
+    //   })
+    // });
+    // return observable;
   }
 
 
   sendMessage() {
-    this.socket.emit('add-message', { text: this.message});
-    this.message = '';
+    // this.socket.emit('add-message', { text: this.message});
+    // this.message = '';
     // this.db.list('/chat').push({
     //   username: this.username,
     //   message: this.message
@@ -69,12 +69,12 @@ export class ChatPage {
   }
 
   getMessages() {
-    let observable = new Observable(observer => {
-      this.socket.on('message', data => {
-        observer.next(data);
-      })
-    });
-    return observable;
+    // let observable = new Observable(observer => {
+    //   this.socket.on('message', data => {
+    //     observer.next(data);
+    //   })
+    // });
+    // return observable;
   }
 
   
@@ -92,7 +92,7 @@ export class ChatPage {
     //   specialMessage: true,
     //   message: `${this.username} has left the room`
     // });
-    this.socket.disconnect();
+    // this.socket.disconnect();
   }
 
   showToast(msg) {
