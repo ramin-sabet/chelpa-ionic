@@ -5,7 +5,9 @@ import { UserAuthenticationProvider } from '../../providers/user-authentication/
 import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { AlertController } from 'ionic-angular';
 import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
+import { ChatProvider } from '../../providers/chat/chat';
 import { Storage } from '@ionic/storage';
+import { Socket } from 'ng-socket-io';
 
 @IonicPage()
 @Component({
@@ -23,20 +25,27 @@ export class ExistingRidesPage {
   creatorId: string;
   arrayRides: any[] = [];
   dataReturned: Boolean = true;
+  userName: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
     private joinTheRide: EventsDetailsProvider, private alertCtrl: AlertController,
-    private availableRides: AvailableRidesProvider, private storage: Storage) {
+    private availableRides: AvailableRidesProvider, private storage: Storage,
+    private socket: Socket, private chatPro: ChatProvider) {
+    this.storage.get('userName').then((val) => {
+      this.userName = val;
+    });
     this.tripId = navParams.get('param1');
     this.availableRides.getAsyncData(this.tripId)
       .subscribe(data => {
-        if (data == null) {
+        console.log(data);
+        if (data == 'No Data exists') {
+          this.dataReturned = false;
+        } else {
           for (var i = 0; i < data.modifiedData.length; i++) {
             this.arrayRides.push({ 'From': data.modifiedData[i]['from'], 'To': data.modifiedData[i]['to'], 'creatorId': data.modifiedData[i]['creatorId'], 'rideId': data.modifiedData[i]['_id'] })
+            this.dataReturned = true;
           }
-        } else {
-          this.dataReturned = false;
         }
       });
 
@@ -51,37 +60,47 @@ export class ExistingRidesPage {
   }
 
 
-  joinRide(ride) {
+  // joinRide(ride) {
 
-    let joinedPerson = { "userId": ride.creatorId, "rideId": ride.rideId };
+  //   let joinedPerson = { "userId": ride.creatorId, "rideId": ride.rideId };
 
 
 
-    let confirm = this.alertCtrl.create({
-      title: 'Joining the Ride?',
-      message: 'As you joining this ride your phone number with be available to the creator of the ride?',
-      buttons: [
-        {
-          text: 'Disagree',
-          handler: () => {
-            let alert = this.alertCtrl.create({
-              title: 'Cancelled!',
-              subTitle: 'You have cancelled your request to join the ride!',
-              buttons: ['OK']
-            });
-            alert.present();
-          }
-        },
-        {
-          text: 'Agree',
-          handler: () => {
-            this.joinTheRide.joinRide(this.objectId, joinedPerson);
-            this.navCtrl.push('ChelpaHomePage');
-          }
-        }
-      ]
-    });
-    confirm.present();
+  //   let confirm = this.alertCtrl.create({
+  //     title: 'Joining the Ride?',
+  //     message: 'As you joining this ride your phone number with be available to the creator of the ride?',
+  //     buttons: [
+  //       {
+  //         text: 'Disagree',
+  //         handler: () => {
+  //           let alert = this.alertCtrl.create({
+  //             title: 'Cancelled!',
+  //             subTitle: 'You have cancelled your request to join the ride!',
+  //             buttons: ['OK']
+  //           });
+  //           alert.present();
+  //         }
+  //       },
+  //       {
+  //         text: 'Agree',
+  //         handler: () => {
+  //           this.joinTheRide.joinRide(this.objectId, joinedPerson);
+  //           this.navCtrl.push('ChelpaHomePage');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   confirm.present();
+  // }
+
+  chat(ride) {
+    
+    this.chatPro.createNewConversation(ride.creatorId);
+    // this.socket.connect();
+    // this.socket.emit('set-nickname', this.userName);
+    this.navCtrl.push('ChatPage', {
+      param1: this.userName
+    })
   }
 
 
@@ -100,7 +119,7 @@ export class ExistingRidesPage {
 
   }
 
-  openMenu() {
+  limitedResult() {
 
     let prompt = this.alertCtrl.create({
       title: 'Login',
@@ -129,7 +148,18 @@ export class ExistingRidesPage {
         {
           text: 'Limit the results',
           handler: data => {
-            console.log(data);
+            this.availableRides.limitedResult(this.tripId, data)
+              .subscribe(data => {
+                this.arrayRides = [];
+                if (data == 'No Data exists') {
+                  this.dataReturned = false;
+                } else {
+                  for (var i = 0; i < data.modifiedData.length; i++) {
+                    this.arrayRides.push({ 'From': data.modifiedData[i]['from'], 'To': data.modifiedData[i]['to'], 'creatorId': data.modifiedData[i]['creatorId'], 'rideId': data.modifiedData[i]['_id'] })
+                    this.dataReturned = true;
+                  }
+                }
+              });
           }
         }
       ]
@@ -141,8 +171,6 @@ export class ExistingRidesPage {
 
     await this.userDetails.getDetails(user.creatorId)
       .subscribe((data => {
-        console.log("JKL");
-        console.log(data.data);
         this.user = ({ "createdAt": data.data.createdAt, "phoneNumber": data.data.phoneNumber, "userName": data.data.userName })
         this.navCtrl.push('UserProfilePage', {
           param1: this.user

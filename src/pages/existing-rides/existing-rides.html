@@ -4,19 +4,22 @@
 
 
 <ion-content padding class="action-sheets-basic-page">
-  <button ion-button block (click)="openMenu()">
-    Sorting By
+  <button ion-button block (click)="limitedResult()">
+    Limit the results
   </button>
 
   <ion-list>
-    <ion-list-header>Travelling from the event</ion-list-header>
+    <!-- <ion-list-header>Travelling from the event</ion-list-header> -->
+    <div *ngIf="!dataReturned">
+      <p>Sorry! Currently there is no match for your trip</p>
+    </div>
     <div *ngIf="dataReturned">
       <ion-item-sliding *ngFor="let ride of arrayRides ;let i = index;" #item>
         <ion-item>
           <h2>{{ride.From}}</h2>
           <p>{{ride.To}}</p>
           <button ion-button clear item-end (click)="showDetails(ride)">View</button>
-          <button ion-button clear item-end (click)="joinRide(ride)">Connect</button>
+          <button ion-button clear item-end (click)="chat(ride)">Connect</button>
         </ion-item>
 
       </ion-item-sliding>

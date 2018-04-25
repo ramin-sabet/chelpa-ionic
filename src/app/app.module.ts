@@ -26,7 +26,11 @@ import { AvailableRidesProvider } from '../providers/available-rides/available-r
 import { RideEngineProvider } from '../providers/ride-engine/ride-engine';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { TripProvider } from '../providers/trip/trip';
+import { ChatProvider } from '../providers/chat/chat';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 const firebaseConfig: FirebaseAppConfig = {
   apiKey: "AIzaSyAVREAUgG53zTYKUGUYI81IZPq5g-205DI",
@@ -44,6 +48,7 @@ const firebaseConfig: FirebaseAppConfig = {
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
@@ -77,7 +82,8 @@ const firebaseConfig: FirebaseAppConfig = {
     RideEngineProvider,
     Camera,
     FileTransfer,
-    TripProvider
+    TripProvider,
+    ChatProvider
   ]
 })
 export class AppModule { }

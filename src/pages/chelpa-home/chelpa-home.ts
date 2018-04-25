@@ -103,15 +103,6 @@ export class ChelpaHomePage {
   }
 
   ionViewDidLoad() {
-    this.storage.get('phoneNumber').then((val) => {
-      //   this.userInfo.phoneNumber = val;
-    });
-    this.storage.get('userId').then((val) => {
-      //   this.userInfo.externalAppUserId = val;
-    });
-    this.storage.get('userName').then((val) => {
-      // this.userName = val;
-    });
   }
 
   editProfile() {
@@ -145,11 +136,5 @@ export class ChelpaHomePage {
           this.navCtrl.push('DisplayEventPage', { result: result });
         })
     }
-  }
-
-  Chat(){
-    this.navCtrl.push('ChatPage', {
-      param1: this.profileName
-    })
   }
 }

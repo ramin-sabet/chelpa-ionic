@@ -15,6 +15,17 @@ export class AvailableRidesProvider {
 
   }
 
+  limitedResult(tripId, limitedData) {
+    console.log(limitedData);
+    this.storage.get('firebaseToken').then((val) => {
+      this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('authorization', 'Bearer ' + val);
+    });
+    return this.http.get<any>(this.url + `trips/${tripId}/${limitedData.timeLimit}/${limitedData.originLimit}/${limitedData.destinationLimit}`, { headers: this.returnedData });
+  }
+
+
+
   getAsyncData(tripId) {
     this.storage.get('firebaseToken').then((val) => {
       this.returnedData = new HttpHeaders().set('Content-Type', 'application/json')
