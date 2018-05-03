@@ -15,7 +15,6 @@ export class ChatPage {
   user: string = '';
   userId: string = '';
   messageText: string = '';
-  _chatSubscription;
   messages: object[] = [];
   room: string = '';
   messageArray: Array<{ user: String, message: String }> = [];

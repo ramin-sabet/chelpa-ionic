@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
-import { ChelpaHomePage } from '../chelpa-home/chelpa-home';
 import { Storage } from '@ionic/storage';
 import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
 import * as firebase from 'firebase';

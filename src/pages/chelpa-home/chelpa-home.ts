@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 // import { EventSearchProvider } from '../../providers/event-search/event-search';
 // import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { TripProvider } from '../../providers/trip/trip';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from 'ionic-angular';
 
 

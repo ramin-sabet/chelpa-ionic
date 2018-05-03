@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage} from '@ionic/storage';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProfileInfoPage } from '../profile-info/profile-info'
 import * as firebase from 'firebase';
 
 

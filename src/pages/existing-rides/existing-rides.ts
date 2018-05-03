@@ -6,7 +6,7 @@ import { AlertController } from 'ionic-angular';
 import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
 import { ChatProvider } from '../../providers/chat/chat';
 import { Storage } from '@ionic/storage';
-import * as io from 'socket.io-client';
+
 
 @IonicPage()
 @Component({
