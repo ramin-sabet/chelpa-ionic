@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database'
-import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { Storage } from '@ionic/storage';
-// import { Socket } from 'ng-socket-io';
 import { Observable } from 'rxjs/Observable';
-
+import { ChatProvider } from '../../providers/chat/chat';
 
 
 @IonicPage()
@@ -15,92 +12,59 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ChatPage {
 
-  username: string = '';
-  message = '';
+  user: string = '';
+  userId: string = '';
+  messageText: string = '';
   _chatSubscription;
   messages: object[] = [];
+  room: string = '';
+  messageArray: Array<{ user: String, message: String }> = [];
 
-  constructor(public db: AngularFireDatabase,
+
+  constructor(
     public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
-     private toastCtrl: ToastController) {
+    private toastCtrl: ToastController, private _chatService: ChatProvider) {
+
+    this.room = navParams.get('param2');
+    this._chatService.newUserJoined()
+      .subscribe(data => this.messageArray.push(data));
+
+
+    this._chatService.userLeftRoom()
+      .subscribe(data => this.messageArray.push(data));
+
+    this._chatService.newMessageReceived()
+      .subscribe(data => this.messageArray.push(data));
+
     this.storage.get('userName').then((val) => {
-      this.username = val;
+      this.user = val;
     });
-    // this._chatSubscription = this.db.list('/chat').valueChanges().subscribe(data => {
-    //   this.messages = data;
-    // });
-    // this.getMessages().subscribe(message => {
-    //   this.messages.push(message);
-    // })
-
-    // this.getUsers().subscribe(data => {
-    //   let user = data['user'];
-    //   if(data['event'] === 'left'){
-    //     this.showToast('User left: ' + user);
-    //   }else{
-    //     this.showToast('User joined: ' + user);
-    //   }
-    // })
+    this.storage.get('userId').then((val) => {
+      this.userId = val;
+    });
   }
 
-  getUsers() {
-    // let observable = new Observable(observer => {
-    //   this.socket.on('users-changed', data => {
-    //     observer.next(data);
-    //   })
-    // });
-    // return observable;
-  }
-
+  // ionViewDidLoad() {
+  // this.db.list('/chat').push({
+  //   specialMessage: true,
+  //   message: `${this.username} has joined the room`
+  // });
+  // }
 
   sendMessage() {
-    // this.socket.emit('add-message', { text: this.message});
-    // this.message = '';
-    // this.db.list('/chat').push({
-    //   username: this.username,
-    //   message: this.message
-    // }).then(() => {
-    //   // message is sent
-    // })
-    // // .catch( () => {
-    // //   // some error. maybe firebase is unreachable
-    // // });
-    // this.message = '';
-  }
-
-  getMessages() {
-    // let observable = new Observable(observer => {
-    //   this.socket.on('message', data => {
-    //     observer.next(data);
-    //   })
-    // });
-    // return observable;
-  }
-
-  
-
-  ionViewDidLoad() {
-    // this.db.list('/chat').push({
-    //   specialMessage: true,
-    //   message: `${this.username} has joined the room`
-    // });
+    this._chatService.sendMessage({ user: this.user, room: this.room, message: this.messageText });
+    this.messageText = ''
   }
 
   ionViewWillLeave() {
+    this._chatService.leaveRoom({ user: this.user, room: this.room });
+
     // this._chatSubscription.unsubscribe();
     // this.db.list('/chat').push({
     //   specialMessage: true,
     //   message: `${this.username} has left the room`
     // });
     // this.socket.disconnect();
-  }
-
-  showToast(msg) {
-     let toast = this.toastCtrl.create({
-       message: msg,
-       duration: 2000
-     });
-     toast.present();
   }
 
 }

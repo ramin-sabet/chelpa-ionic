@@ -90,6 +90,7 @@ export class ChelpaHomePage {
               buttons: ['OK']
             });
             alert.present();
+            console.log(this.tripId);
             this.navCtrl.push('ExistingRidesPage', {
               param1: this.tripId,
             })

@@ -9,23 +9,33 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row *ngFor="let message of messages">
+    <div class="row">
+      <div class="well" style="height:200px; padding:15px;">
+        <div *ngFor="let item of messageArray">
+          <span>
+            <strong>{{item.user}} : </strong> {{item.message}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- <ion-row *ngFor="let item of messageArray">
 
-      <ion-col col-9 *ngIf="message.from !== nickname" class="message" [ngClass]="{'my_message': message.from === nickname, 'other_message': message.from !== nickname}">
-        <span class="user_name">{{ message.from }}:</span>
-        <br>
-        <span>{{ message.text }}</span>
-        <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div>
-      </ion-col>
+      <! <ion-col col-9 *ngIf="message.from !== nickname" class="message" [ngClass]="{'my_message': message.from === nickname, 'other_message': message.from !== nickname}"> -->
+    <!-- <ion-col col-9>
+        <span class="user_name">{{ item}}:</span>
+        <br> -->
+    <!-- <span>{{ item.message }}</span> -->
+    <!-- <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div> -->
+    <!-- </ion-col> -->
 
-      <ion-col offset-3 col-9 *ngIf="message.from === nickname" class="message" [ngClass]="{'my_message': message.from === nickname, 'other_message': message.from !== nickname}">
-        <span class="user_name">{{ message.from }}:</span>
-        <br>
-        <span>{{ message.text }}</span>
-        <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div>
-      </ion-col>
+    <!-- <ion-col offset-3 col-9 *ngIf="message.from === nickname" class="message" [ngClass]="{'my_message': message.from === nickname, 'other_message': message.from !== nickname}"> -->
+    <!-- <ion-col offset-3 col-9>
+        <span class="user_name">{{item}}:</span>
+        <br> -->
+    <!-- <span>{{ item.message }}</span> -->
+    <!-- <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div> -->
+    <!-- </ion-col> -->
 
-    </ion-row>
+    <!-- </ion-row> -->
   </ion-grid>
 
   <!-- <div id="chatMessages">
@@ -44,7 +54,7 @@
     <ion-row class="message_row">
       <ion-col col-9>
         <ion-item no-lines>
-          <ion-input type="text" placeholder="Message" [(ngModel)]="message"></ion-input>
+          <ion-input type="text" placeholder="Message" [(ngModel)]="messageText"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col col-3>

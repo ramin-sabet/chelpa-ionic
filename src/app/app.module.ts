@@ -47,7 +47,7 @@ const firebaseConfig: FirebaseAppConfig = {
   ],
   imports: [
     BrowserModule,
-    // SocketIoModule.forRoot(config),
+    //SocketIoModule.forRoot(config),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),

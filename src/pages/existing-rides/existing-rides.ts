@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Platform, ActionSheetController } from 'ionic-angular';
 import { UserAuthenticationProvider } from '../../providers/user-authentication/user-authentication';
-// import { EventsDetailsProvider } from '../../providers/events-details/events-details';
 import { AlertController } from 'ionic-angular';
 import { AvailableRidesProvider } from '../../providers/available-rides/available-rides';
 import { ChatProvider } from '../../providers/chat/chat';
 import { Storage } from '@ionic/storage';
-import { Socket } from 'ng-socket-io';
+import * as io from 'socket.io-client';
 
 @IonicPage()
 @Component({
@@ -17,7 +16,6 @@ import { Socket } from 'ng-socket-io';
 export class ExistingRidesPage {
 
   user: any;
-
   rides;
   objectId;
   tripId: string = '';
@@ -26,12 +24,13 @@ export class ExistingRidesPage {
   arrayRides: any[] = [];
   dataReturned: Boolean = true;
   userName: string = '';
+  room: string = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, private userDetails: UserAuthenticationProvider,
-    private alertCtrl: AlertController,
-    private availableRides: AvailableRidesProvider, private storage: Storage,
-    private chatPro: ChatProvider) {
+    private alertCtrl: AlertController, private _chatService: ChatProvider,
+    private availableRides: AvailableRidesProvider, private storage: Storage) {
+
     this.storage.get('userName').then((val) => {
       this.userName = val;
     });
@@ -60,46 +59,17 @@ export class ExistingRidesPage {
   }
 
 
-  // joinRide(ride) {
 
-  //   let joinedPerson = { "userId": ride.creatorId, "rideId": ride.rideId };
-
+  async chat(ride) {
 
 
-  //   let confirm = this.alertCtrl.create({
-  //     title: 'Joining the Ride?',
-  //     message: 'As you joining this ride your phone number with be available to the creator of the ride?',
-  //     buttons: [
-  //       {
-  //         text: 'Disagree',
-  //         handler: () => {
-  //           let alert = this.alertCtrl.create({
-  //             title: 'Cancelled!',
-  //             subTitle: 'You have cancelled your request to join the ride!',
-  //             buttons: ['OK']
-  //           });
-  //           alert.present();
-  //         }
-  //       },
-  //       {
-  //         text: 'Agree',
-  //         handler: () => {
-  //           this.joinTheRide.joinRide(this.objectId, joinedPerson);
-  //           this.navCtrl.push('ChelpaHomePage');
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   confirm.present();
-  // }
-
-  chat(ride) {
-
-    this.chatPro.createNewConversation(ride.creatorId);
-    // this.socket.connect();
-    // this.socket.emit('set-nickname', this.userName);
+    await this.storage.get('conversationId').then((val) => {
+      this.room = val;
+    });
+    this._chatService.joinRoom({ user: this.userName, room: this.room });
     this.navCtrl.push('ChatPage', {
-      param1: this.userName
+      param1: this.userName,
+      param2: this.room
     })
   }
 
