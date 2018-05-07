@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 
 @Injectable()
-export class TripProvider {
+export class TripProvider{
 
   url = "http://localhost:3000/api/v1/trips";
   returnedData: any;

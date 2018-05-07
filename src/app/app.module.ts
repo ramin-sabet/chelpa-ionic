@@ -7,9 +7,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { ChelpaHomePageModule } from '../pages/chelpa-home/chelpa-home.module';
 import { CodePageModule } from '../pages/code/code.module';
+import { PhoneConfirmationPageModule } from '../pages/phone-confirmation/phone-confirmation.module';
 import { ProfileInfoPageModule } from '../pages/profile-info/profile-info.module';
 import { UserProfilePageModule } from '../pages/user-profile/user-profile.module';
-import { TermsAndConditionsPageModule } from '../pages/terms-and-conditions/terms-and-conditions.module';
 import { AngularFireModule, FirebaseAppConfig } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -49,7 +49,7 @@ const firebaseConfig: FirebaseAppConfig = {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    TermsAndConditionsPageModule,
+    PhoneConfirmationPageModule,
     AngularFireAuthModule,
     ChelpaHomePageModule,
     CodePageModule,

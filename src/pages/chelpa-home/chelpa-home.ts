@@ -35,6 +35,8 @@ export class ChelpaHomePage {
     navParams: NavParams, private storage: Storage, private formBuilder: FormBuilder,
     public autoComplete: AutoCompleteLocationProvider, private tripProvider: TripProvider,
     private alertCtrl: AlertController) {
+
+
     this.storage.get('userId').then((val) => {
       this.creatorId = val;
     });
@@ -112,20 +114,11 @@ export class ChelpaHomePage {
   // addNewEvent() {
   //   this.navCtrl.push('AddNewEventPage');
   // }
-
-  sendCode(form) {
-
-    this.afAuth.auth.signInWithPhoneNumber(form.value.phoneNumber, new firebase.auth.RecaptchaVerifier('re-container', {
-      'size': 'invisible'
-    })).then(data => {
-      this.storage.set('phoneNumber', form.value.phoneNumber);
-      this.navCtrl.push('CodePage', {
-        confirmationResult: data
-      })
-    }).catch(err => {
-      console.log(err);
-    })
+  phoneConfirmation() {
+    this.navCtrl.push('PhoneConfirmationPage')
   }
+
+
 
   // getEvent(event) {
   //   if (event.propertyId == 0) {

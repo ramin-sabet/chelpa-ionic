@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header *ngIf="afAuth.authState| async">
   <ion-title>
     <div style="text-align:center">
       <h1>Welcome</h1>
@@ -10,7 +10,7 @@
       <h1>Chelpa</h1>
     </div>
   </ion-title>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
   <!-- <ion-auto-complete full [dataProvider]="eventSearch" placeholder="eventSearch" (itemSelected)="getEvent($event)"></ion-auto-complete> -->
@@ -47,7 +47,7 @@
           </ion-select>
         </ion-item>
 
-        <div *ngIf=t oggleOption>
+        <div *ngIf=toggleOption>
           <ion-item>
             <ion-label>
               Price to offer
@@ -73,16 +73,39 @@
 
 
   <ng-template #phForm>
-    <form #phoneForm="ngForm" (ngSubmit)="sendCode(phoneForm)">
+    <!-- <form #phoneForm="ngForm" (ngSubmit)="sendCode(phoneForm)">
       <ion-item>
         <ion-label floating>Phone Number</ion-label>
         <ion-input type="tel" name="phoneNumber" [(ngModel)]="phoneNumber"></ion-input>
       </ion-item>
       <button ion-button full type="submit">Send Code</button>
-    </form>
+    </form> -->
+
+    <div class="gradient">
+      <div text-center class="title">
+        Welcome to Chelpa
+      </div>
+      <div class="row">
+        <div class="col-md-6 " id="img1">
+          <img src="../assets/imgs/firstPageImage.png" class="img-responsive " id="img1">
+        </div>
+      </div>
+      <!-- <div text-center>
+              <ion-img width="180" height="180" src="../assets/imgs/firstPageImage.png"></ion-img>  
+           </div> -->
+
+      <div padding class="footer">
+        <p style="margin-right:20px">
+          Please accept Chalpa
+          <a href="http://ionicframework.com/docs/v2">terms and conditions</a> by pressing confirm and continue
+        </p>
+        <button ion-button (click)="phoneConfirmation()">CONFIRM AND CONTINUE</button>
+      </div>
+    </div>
+
   </ng-template>
   <div id="re-container"></div>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="afAuth.authState| async">
   <button ion-button full type="submit" (click)="editProfile()">Edit Your Profile</button>
 </ion-footer>
